@@ -1,0 +1,97 @@
+openapi: '3.0.2'
+info:
+  title: API Title
+  version: '1.0'
+servers:
+  - url: https://api.server.test/v1
+paths:
+  /chart:
+    get:
+      description: Returns pure statistics for all regions
+      responses:
+        '200':
+          description: OK
+          content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Distribution'
+  /geometries:
+    get:
+      summary: GeoJSON point2d coordinates array
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Point"
+        '400':
+          $ref: '#/components/schemas/Error'
+        '401':
+          $ref: '#/components/schemas/Error'
+        '500':
+          $ref: '#/components/schemas/Error'
+
+components:
+  schemas:
+    Distribution:
+      type: array
+      items:
+        $ref: '#/components/schemas/Region'
+    Region:
+      type: object
+      properties:
+        name:
+          type: string
+          enum:
+            - victoria
+            - new south wales
+            - queensland
+            - tasmania
+            - western australia
+            - southe australia
+        total:
+          type: number
+        percentage:
+          type: number
+    Geometry:
+      type: object
+      description: GeoJSon geometry
+      required:
+        - type
+      externalDocs:
+        url: http://geojson.org/geojson-spec.html#geometry-objects
+      properties:
+        type:
+          type: string
+          enum:
+          - Point
+          - LineString
+          - Polygon
+          - MultiPoint
+          - MultiLineString
+          - MultiPolygon
+          description: the geometry type
+    Point2D:
+      type: array
+      items:
+        type: number
+      maxItems: 2
+      minItems: 2
+    Point:
+      type: object
+      description: GeoJSon geometry
+      externalDocs:
+        url: http://geojson.org/geojson-spec.html#id2
+      allOf:
+        - $ref: '#/components/schemas/Geometry'
+        - properties:
+            coordinates:
+              $ref: '#/components/schemas/Point2D'
+    Error:
+      type: object
+
