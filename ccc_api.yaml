@@ -17,24 +17,17 @@ paths:
                   type: array
                   items:
                     $ref: '#/components/schemas/Distribution'
-  /geometries:
+                    
+  /map:
     get:
-      summary: GeoJSON point2d coordinates array
+      operationId: "getMap"
       responses:
-        '200':
-          description: Successful response
+        "200":
+          description: OK
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Point"
-        '400':
-          $ref: '#/components/schemas/Error'
-        '401':
-          $ref: '#/components/schemas/Error'
-        '500':
-          $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/Maps'
 
 components:
   schemas:
@@ -58,40 +51,56 @@ components:
           type: number
         percentage:
           type: number
+    Maps:
+      type: object
+      properties:
+        type:
+          type: string
+        features:
+          type: array
+          items:
+            $ref: '#/components/schemas/AreaData'
+    AreaData:
+      type: object
+      properties:
+        type:
+          type: string
+        properties:
+          $ref: '#/components/schemas/Property'
+        geometry:
+          $ref: '#/components/schemas/Geometry'
+    Property:
+      type: object
+      properties:
+        id:
+          type: number
+        name:
+          type: string
+        center:
+          $ref: '#/components/schemas/Point'
+        childNum:
+          type: integer
+          description: 不知道干嘛的，先放着
+          default: 1
     Geometry:
       type: object
-      description: GeoJSon geometry
-      required:
-        - type
-      externalDocs:
-        url: http://geojson.org/geojson-spec.html#geometry-objects
       properties:
         type:
           type: string
           enum:
-          - Point
-          - LineString
-          - Polygon
-          - MultiPoint
-          - MultiLineString
-          - MultiPolygon
-          description: the geometry type
-    Point2D:
+            - polygon
+            - line
+          default: polygon
+        coordinates:
+          type: array
+          items:
+            $ref: '#/components/schemas/Point'
+    Point:
       type: array
       items:
         type: number
       maxItems: 2
-      minItems: 2
-    Point:
-      type: object
-      description: GeoJSon geometry
-      externalDocs:
-        url: http://geojson.org/geojson-spec.html#id2
-      allOf:
-        - $ref: '#/components/schemas/Geometry'
-        - properties:
-            coordinates:
-              $ref: '#/components/schemas/Point2D'
+      minItems: 2     
     Error:
       type: object
 
