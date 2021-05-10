@@ -1,0 +1,13 @@
+- hosts: ccc
+
+  vars_files:
+    - host_vars/mrc.yaml
+    
+  roles:
+    - role: add-proxy
+    - role: env-dependencies
+    - role: deploy-docker
+    - role: add-docker-config
+      become: yes
+   
+      

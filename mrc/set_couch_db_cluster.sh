@@ -1,0 +1,1 @@
+. ./unimelb-comp90024-2021-grp-20-openrc.sh; ansible-playbook set_couch_db_cluster.yaml
