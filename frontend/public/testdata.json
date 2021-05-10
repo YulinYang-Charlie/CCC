@@ -1,0 +1,32 @@
+[
+    {
+    "name": "new south wales",
+    "total": 1000,
+    "percentage": 0.6
+    },
+    {
+    "name": "queensland",
+    "total": 102,
+    "percentage": 0.1
+    },
+    {
+    "name": "south australia",
+    "total": 134,
+    "percentage": 0.2
+    },
+    {
+    "name": "western australia",
+    "total": 109,
+    "percentage": 0.4
+    },
+    {
+    "name": "tasmania",
+    "total": 1000,
+    "percentage": 0.6
+    },
+    {
+    "name": "victoria",
+    "total": 200,
+    "percentage": 0.6
+    }
+]
