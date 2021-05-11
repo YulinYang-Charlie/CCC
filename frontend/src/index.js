@@ -19,7 +19,7 @@ import Dynamic from './charts/Dynamic'
 import MultiType from './charts/MultiType'
 import Crazy from './charts/Crazy'
 import ClickEvents from './charts/ClickEvents'
-import Map from './charts/Map'
+import GoogleApiWrapper from './charts/Map'
 import { Link } from 'react-router-dom'
 
 const App = () => (
@@ -131,7 +131,7 @@ const App = () => (
         <Route exact path='/multi' component={MultiType} />
         <Route exact path='/crazy' component={Crazy} />
         <Route exact path='/click-events' component={ClickEvents} />
-        <Route exact path='/map' component={Map} />
+        <Route exact path='/map' component={GoogleApiWrapper} />
       </Switch>
     </div>
   </Router>
