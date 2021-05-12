@@ -17,6 +17,79 @@ paths:
                   type: array
                   items:
                     $ref: '#/components/schemas/Distribution'
+  /timeline:
+    get:
+      parameters:
+        - name: suburb
+          in: path
+          description: suburb
+          required: true
+          schema:
+            type: string
+        - name: theme
+          in: path
+          required: true
+          schema:
+            type: string
+            enum:
+              - covid
+              - lockdown
+              - quarantine
+        - name: start_date
+          in: path
+          required: true
+          schema:
+            type: string
+            format: date
+        - name: end_date
+          in: path
+          required: true
+          schema:
+            type: string
+            format: date
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Timeline'
+  
+  /timeline/all:
+    get:
+      parameters:
+        - name: start_date
+          in: path
+          required: true
+          schema:
+            type: string
+            format: date
+        - name: end_date
+          in: path
+          required: true
+          schema:
+            type: string
+            format: date
+        - name: theme
+          in: path
+          required: true
+          schema:
+            type: string
+            enum:
+              - covid
+              - lockdown
+              - quarantine
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AllTimeline'
                     
   /map:
     get:
@@ -101,6 +174,29 @@ components:
         type: number
       maxItems: 2
       minItems: 2     
+    Timeline:
+      type: object
+      properties:
+        suburb:
+          type: string
+        date: 
+          type: string
+          format: date
+        total:
+          type: number
+        percentage:
+          type: number
+    AllTimeline:
+      type: array
+      items:
+        $ref: '#/components/schemas/TimelineWrapper'
+    TimelineWrapper:
+      type: object
+      properties:
+        suburb:
+          type: string
+        timeline: 
+          $ref: '#/components/schemas/Timeline'
     Error:
       type: object
 
