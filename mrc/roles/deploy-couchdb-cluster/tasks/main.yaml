@@ -1,0 +1,11 @@
+- name: remove couchdb container we have
+  become: yes
+  docker_container:
+     name: couchdb
+     state: absent
+
+- name: create and start coucdb docker containr
+  become: yes
+  docker_container:
+    name: couchdb
+    image: "ibmcom/couchdb3:{{ couchdb_version }}"
