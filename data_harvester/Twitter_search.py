@@ -58,8 +58,8 @@ def main():
     api = tweepy.API(auth)
 
     try:
-        couch = couchdb.Server('http://sumengzhang:199784zsM@119.45.38.52:5984') # Local test db
-        # couch = couchdb.Server('http://admin:admin@172.26.128.238:5984')
+        # couch = couchdb.Server('http://sumengzhang:199784zsM@119.45.38.52:5984') # Local test db
+        couch = couchdb.Server('http://admin:admin@172.26.128.238:5984')
         db = couch.create(args.db)
     except couchdb.http.PreconditionFailed:
         db = couch[args.db]
