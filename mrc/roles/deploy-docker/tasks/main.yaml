@@ -1,13 +1,12 @@
 ---
-# Uninstall old Docker
-- name: Uninstall old versions of docker
+
+- name: Uninstall old docker
   become: yes
   apt:
     name: ['docker', 'docker-engine', 'docker.io']
     state: absent
 
-# Install Docker dependencies
-- name: Install dependencies
+- name: Install docker dependencies
   become: yes
   apt:
     name: ['apt-transport-https', 'ca-certificates', 'curl', 'python-setuptools', 'software-properties-common']
@@ -15,16 +14,12 @@
     install_recommends: no
     update_cache: yes
 
-
-# Add Docker repository key
 - name: Add Docker apt repository key
   become: yes
   apt_key:
     url: https://download.docker.com/linux/ubuntu/gpg
     state: present
 
-
-# Add Docker repository
 - name: Add Docker apt repository and update apt cache
   become: yes
   apt_repository:
@@ -33,8 +28,6 @@
     update_cache: yes
     state: present
 
-
-# Install Docker
 - name: Install docker
   become: yes
   apt:
@@ -43,8 +36,6 @@
     install_recommends: no
     update_cache: yes
 
-
-# Install Docker compose
 - name: Install docker-compose
   tags: 'docker'
   become: yes

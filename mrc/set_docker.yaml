@@ -9,5 +9,7 @@
     - role: deploy-docker
     - role: add-docker-config
       become: yes
+    - role: mount-volumes
+      
    
       
