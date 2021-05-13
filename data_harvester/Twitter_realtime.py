@@ -64,7 +64,7 @@ def tweet_user_timeline(apis, db):
 def tweet_realtime(api, db, boundary):
     while True:
         try:
-            for tweet in api.request("statuses/filter"):
+            for tweet in api.request("statuses/filter", {"locations": boundary}):
                 if "text" in tweet:
                     print('STREAM: %s -- %s\n' % (tweet['user']['screen_name'], tweet['text']))
                     # save tweet to database
