@@ -3,22 +3,23 @@ availability_zone: melbourne-qh2-uom
 
 # Volume
 volumes:
-  - vol_name: demo-vol-1-1
-    vol_size: 10
-  - vol_name: demo-vol-1-2
-    vol_size: 10
-  - vol_name: demo-vol-2-1
-    vol_size: 10
-  - vol_name: demo-vol-2-2
-    vol_size: 10
-  - vol_name: demo-vol-3-1
-    vol_size: 10
-  - vol_name: demo-vol-3-2
-    vol_size: 10
-  - vol_name: demo-vol-4-1
-    vol_size: 10
-  - vol_name: demo-vol-4-2
-    vol_size: 10
+  - vol_name: demo-vol-1
+    vol_size: 50
+    device: /dev/vdb
+    mountpoint: /data
+  - vol_name: demo-vol-2
+    vol_size: 50
+    device: /dev/vdb
+    mountpoint: /data
+  - vol_name: demo-vol-3
+    vol_size: 50
+    device: /dev/vdb
+    mountpoint: /data
+  - vol_name: demo-vol-4
+    vol_size: 50
+    device: /dev/vdb
+    mountpoint: /home/ubuntu/COMP90024
+  
 
 # Security group
 security_groups:
@@ -38,16 +39,16 @@ security_groups:
 # Instance
 instances:
   - name: demo-1
-    volumes: ['demo-vol-1-1', 'demo-vol-1-2']
+    volumes: ['demo-vol-1']
     flavor: uom.mse.2c9g
   - name: demo-2
-    volumes: ['demo-vol-2-1', 'demo-vol-2-2']
+    volumes: ['demo-vol-2']
     flavor: uom.mse.2c9g
   - name: demo-3
-    volumes: ['demo-vol-3-1', 'demo-vol-3-2']
+    volumes: ['demo-vol-3']
     flavor: uom.mse.2c9g
   - name: demo-4
-    volumes: ['demo-vol-4-1', 'demo-vol-4-2']
+    volumes: ['demo-vol-4']
     flavor: uom.mse.1c4g
     
 
@@ -57,5 +58,9 @@ docker_user: ubuntu
 couchdb_user: admin
 couchdb_password: admin
 couchdb_version: '3.0.0'
-couchdb_cookie: ''
-couchdb_uuid: ''
+couchdb_port: 5984
+couchdb_cookie: 'a192aeb9904e6590849337933b000c99'
+cluster_name: '_cluster_setup'
+masternode: '172.26.128.238'
+workers: ['172.26.132.8','172.26.132.223']
+nodename: 'test'
