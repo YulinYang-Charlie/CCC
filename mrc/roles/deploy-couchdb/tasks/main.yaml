@@ -1,8 +1,4 @@
-- name: remove couchdb container we have
-  become: yes
-  docker_container:
-     name: couchdb
-     state: absent
+
 
 - name: create and start coucdb docker containr
   become: yes
@@ -12,11 +8,13 @@
     state: started
     ports:
       - "5984:5984"
-      #- "4369:4369"
       - "9100-9200:9100-9200"
+      - "4369:4369"
     volumes:
       - /data
     pull: yes
     env:
       COUCHDB_USER: "{{couchdb_user}}"
       COUCHDB_PASSWORD: "{{couchdb_password}}"
+      NODENAME: "{{ansible_host}}"
+      COUCHDB_SECRET: "{{couchdb_cookie}}"

@@ -1,0 +1,6 @@
+- hosts: backend
+  vars_files:
+    - host_vars/mrc.yaml
+  roles:
+    - role: deploy-back
+      

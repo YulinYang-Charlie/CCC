@@ -1,2 +1,14 @@
+ccc/entity/CouchDbInfo.class
+ccc/service/HelloService.class
+ccc/entity/Region.class
 ccc/Starter.class
+ccc/service/ChartService.class
+ccc/pojo/Sofa.class
+ccc/config/CouchDBConfig.class
+ccc/entity/Geometry.class
+ccc/service/serviceImp/HelloServiceImpl.class
+ccc/entity/Region$regionName.class
+ccc/controller/MapController.class
 ccc/controller/HelloController.class
+ccc/service/serviceImp/ChartServiceImpl.class
+ccc/entity/Hello.class

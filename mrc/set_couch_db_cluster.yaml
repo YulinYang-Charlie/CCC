@@ -5,4 +5,11 @@
   gather_facts: true
   roles:
     - role: deploy-couchdb
+
+- hosts: masternode
+  vars_files:
+    - host_vars/mrc.yaml
+  gather_facts: true
+  roles:
+    - role: deploy-couchdb-cluster
   

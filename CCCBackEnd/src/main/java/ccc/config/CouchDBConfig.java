@@ -23,20 +23,16 @@ public class CouchDBConfig {
 
     @Bean(name = "CouchDbConnector")
     public CouchDbConnector couchDbConnector() throws Exception {
+        System.out.println("Begin to connect couchdb: "+couchDBInfo.getHost()+"......");
         HttpClient httpClient = new StdHttpClient.Builder().url(couchDBInfo.getHost() + ":"+ couchDBInfo.getPort())
                 .username(couchDBInfo.getUsername()).connectionTimeout(10000).socketTimeout(1000000)
                 .password(couchDBInfo.getPassword()).build();
         CouchDbInstance couchDbInstance = new StdCouchDbInstance(httpClient);
         CouchDbConnector couchDbConnector = new StdCouchDbConnector(couchDBInfo.getDatabase(), couchDbInstance);
         couchDbConnector.createDatabaseIfNotExists();
-        System.out.println("注入成功");
+        System.out.println("Connect database successfully"+couchDBInfo.getHost());
         return couchDbConnector;
     }
-
-
-
-
-
 
 
 }

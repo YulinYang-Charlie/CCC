@@ -1,0 +1,29 @@
+---
+ - name: shut down old docker-compose
+   shell: docker-compose down --rmi local
+   args:
+     chdir: CCC/CCCBackEnd
+
+ - name: delete old images
+   shell: docker rmi {{image_name}}
+
+ - name: judge CCC exist?
+   stat:
+     path: CCC/
+   register: result
+ - name: remove old dir CCC
+   file:
+     state: absent
+     path: CCC/
+   when: result.stat.exists
+
+ - name: git clone all code
+   shell: git clone http://github.com/YulinYang-Charlie/CCC.git
+
+ - name: start new docker compose for backend 
+   shell: docker-compose up -d
+   args:
+     chdir: CCC/CCCBackEnd
+   
+ 
+
