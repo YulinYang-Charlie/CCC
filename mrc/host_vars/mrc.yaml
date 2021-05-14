@@ -64,3 +64,4 @@ cluster_name: '_cluster_setup'
 masternode: '172.26.128.238'
 workers: ['172.26.132.8','172.26.132.223']
 nodename: 'test'
+image_name: "cccapp"

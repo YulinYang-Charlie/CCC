@@ -1,0 +1,17 @@
+---
+ - name: shut down old docker-compose
+   shell: docker-compose down --rmi local
+   args:
+     chdir: /home/ubuntu/CCC/CCCBackend
+
+ - name: delete old containers
+   shell: docker rm {{container_name}}
+
+ - name: delete old images
+   shell: docker rm {{image_name}}
+ - name: start new docker compose
+   shell: docker-compose up -d
+   args:
+     chdir: /home/ubuntu/CCC/CCCBackend
+
+ 

@@ -1,0 +1,1 @@
+. ./unimelb-comp90024-2021-grp-20-openrc.sh; ansible-playbook set_backend.yaml
