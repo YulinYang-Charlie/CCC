@@ -70,13 +70,14 @@ def tweet_user_timeline(apis, db):
         id = id_lst.pop(0)
 
         try:
-            for tweet in api.request("statuses/user_timeline", {"user_id": id, "count": 100}):
-                if "text" in tweet:
-                    # print('USER: %s -- %s\n' % (tweet['user']['screen_name'], tweet['text']))
+            for tweet in tweepy.Cursor(api.user_timeline, user_id=id).items(100):
+                print(tweet)
+                if "text" in tweet._json:
+                    print('USER: %s -- %s\n' % (tweet._json['user']['screen_name'], tweet._json['text']))
                     # save tweet to database
-                    db.save(tweet)
-                elif 'message' in tweet:
-                    print('ERROR %s: %s\n' % (tweet['code'], tweet['message']))
+                    db.save(tweet._json)
+                elif 'message' in tweet._json:
+                    print('ERROR %s: %s\n' % (tweet._json['code'], tweet._json['message']))
         except:
             i += 1
             if i == len(apis):
@@ -85,22 +86,6 @@ def tweet_user_timeline(apis, db):
             print("Exceed rate limits, switch to the next api")
             id_lst.append(id)
             pass
-    
-
-# def tweet_realtime(api, db, boundary):
-#     while True:
-#         try:
-#             for tweet in api.request("statuses/filter", {"locations": boundary}):
-#                 if "text" in tweet:
-#                     print('STREAM: %s -- %s\n' % (tweet['user']['screen_name'], tweet['text']))
-#                     # save tweet to database
-#                     db.save(tweet)
-#                     # only get timeline for user tweeted with coordinates
-#                     id_lst.append(tweet["user"]["id"])
-#                 elif 'message' in tweet:
-#                     print('ERROR %s: %s\n' % (tweet['code'], tweet['message']))
-#         except:
-#             pass
 
 def main():
     args = get_args()
@@ -116,8 +101,8 @@ def main():
         n += 1
 
     try:
-        couch = couchdb.Server('http://sumengzhang:199784zsM@119.45.38.52:5984') # Local test db
-        # couch = couchdb.Server('http://admin:admin@172.26.128.238:5984')
+        # couch = couchdb.Server('http://sumengzhang:199784zsM@119.45.38.52:5984') # Local test db
+        couch = couchdb.Server('http://admin:admin@172.26.128.238:5984')
         db = couch.create(args.db)
     except couchdb.http.PreconditionFailed:
         db = couch[args.db]

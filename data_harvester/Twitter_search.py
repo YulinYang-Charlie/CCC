@@ -56,13 +56,13 @@ def main():
 
     apis = json.load(open("api.json"))['APIs']
 
-    auth = tweepy.OAuthHandler(apis[0]['consumer_key'], apis[0]['consumer_secret'])
-    auth.set_access_token(apis[0]['access_token'], apis[0]['access_token_secret'])
+    auth = tweepy.OAuthHandler(apis[1]['consumer_key'], apis[1]['consumer_secret'])
+    auth.set_access_token(apis[1]['access_token'], apis[1]['access_token_secret'])
     api = tweepy.API(auth)
 
     try:
-        couch = couchdb.Server('http://sumengzhang:199784zsM@119.45.38.52:5984') # Local test db
-        # couch = couchdb.Server('http://admin:admin@172.26.128.238:5984')
+        # couch = couchdb.Server('http://sumengzhang:199784zsM@119.45.38.52:5984') # Local test db
+        couch = couchdb.Server('http://admin:admin@172.26.128.238:5984')
         db = couch.create(args.db)
     except couchdb.http.PreconditionFailed:
         db = couch[args.db]
