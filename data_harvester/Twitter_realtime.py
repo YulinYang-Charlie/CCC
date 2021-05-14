@@ -70,7 +70,7 @@ def tweet_user_timeline(apis, db):
         id = id_lst.pop(0)
 
         try:
-            for tweet in api.request("statuses/user_timeline", {"user_id": id, "count": 200}):
+            for tweet in api.request("statuses/user_timeline", {"user_id": id, "count": 100}):
                 if "text" in tweet:
                     # print('USER: %s -- %s\n' % (tweet['user']['screen_name'], tweet['text']))
                     # save tweet to database
@@ -83,6 +83,7 @@ def tweet_user_timeline(apis, db):
                 i = 0
             api = apis[i]
             print("Exceed rate limits, switch to the next api")
+            id_lst.append(id)
             pass
     
 
