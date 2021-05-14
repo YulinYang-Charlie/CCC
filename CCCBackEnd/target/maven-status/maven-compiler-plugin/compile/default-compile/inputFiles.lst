@@ -1,2 +1,13 @@
-/Users/sumengzhang/Desktop/JavaStudy/CCCBackEnd/src/main/java/ccc/controller/HelloController.java
-/Users/sumengzhang/Desktop/JavaStudy/CCCBackEnd/src/main/java/ccc/Starter.java
+/Users/sumengzhang/Desktop/CCC/CCCBackEnd/src/main/java/ccc/pojo/Sofa.java
+/Users/sumengzhang/Desktop/CCC/CCCBackEnd/src/main/java/ccc/service/ChartService.java
+/Users/sumengzhang/Desktop/CCC/CCCBackEnd/src/main/java/ccc/entity/Geometry.java
+/Users/sumengzhang/Desktop/CCC/CCCBackEnd/src/main/java/ccc/service/serviceImp/ChartServiceImpl.java
+/Users/sumengzhang/Desktop/CCC/CCCBackEnd/src/main/java/ccc/entity/Region.java
+/Users/sumengzhang/Desktop/CCC/CCCBackEnd/src/main/java/ccc/Starter.java
+/Users/sumengzhang/Desktop/CCC/CCCBackEnd/src/main/java/ccc/service/HelloService.java
+/Users/sumengzhang/Desktop/CCC/CCCBackEnd/src/main/java/ccc/entity/Hello.java
+/Users/sumengzhang/Desktop/CCC/CCCBackEnd/src/main/java/ccc/service/serviceImp/HelloServiceImpl.java
+/Users/sumengzhang/Desktop/CCC/CCCBackEnd/src/main/java/ccc/controller/MapController.java
+/Users/sumengzhang/Desktop/CCC/CCCBackEnd/src/main/java/ccc/config/CouchDBConfig.java
+/Users/sumengzhang/Desktop/CCC/CCCBackEnd/src/main/java/ccc/controller/HelloController.java
+/Users/sumengzhang/Desktop/CCC/CCCBackEnd/src/main/java/ccc/entity/CouchDbInfo.java
