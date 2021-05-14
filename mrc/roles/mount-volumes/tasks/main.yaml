@@ -1,5 +1,5 @@
 ---
-- name: Install dependencies
+- name: install env we need
   tags: 'volumes'
   become: yes
   apt:
@@ -8,7 +8,7 @@
     install_recommends: no
     update_cache: yes
 
-- name: Make file system
+- name: create files
   tags: 'volumes'
   become: yes
   filesystem:
@@ -18,7 +18,7 @@
   with_items:
     - "{{ volumes }}"
 
-- name: Checking folders
+- name: mkdir
   tags: 'volumes'
   become: yes
   stat:
@@ -27,7 +27,7 @@
   with_items:
     - "{{ volumes }}"
 
-- name: Create directory
+- name: check dir
   tags: 'volumes'
   become: yes
   file:
@@ -38,7 +38,7 @@
   with_items:
     - "{{ directory_stats.results }}"
 
-- name: Mount device
+- name: mount
   tags: 'volumes'
   become: yes
   mount:
