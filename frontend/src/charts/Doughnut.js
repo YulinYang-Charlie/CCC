@@ -44,7 +44,7 @@ class DoughnutChart extends React.Component{
   }
 
   getData(){
-    fetch('./testdata.json',{
+    fetch('/v1/chart',{
       method:'GET',
       headers : { 
         'Content-Type': 'application/json',

@@ -1,7 +1,7 @@
 [
     {
     "name": "new south wales",
-    "total": 1000,
+    "total": 100,
     "percentage": 0.6
     },
     {
@@ -21,12 +21,12 @@
     },
     {
     "name": "tasmania",
-    "total": 1000,
+    "total": 100,
     "percentage": 0.6
     },
     {
     "name": "victoria",
-    "total": 200,
+    "total": 100,
     "percentage": 0.6
     }
 ]
