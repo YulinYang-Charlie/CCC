@@ -1,17 +1,22 @@
 package ccc.service.serviceImp;
 
 import ccc.entity.Region;
-import ccc.service.ChartService;
+import ccc.service.ChartsService;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by sumengzhang on 5/5/21 9:35 PM
+ * Created by sumengzhang on 5/14/21 11:03 PM
  */
 @Service
-public class ChartServiceImpl implements ChartService {
+public class ChartsServiceImpl implements ChartsService {
+
+    /**
+     * 我也不知道的，先测试一波
+     * @return
+     */
     @Override
     public List<Region> getPureStatistics() {
         List<Region> res = new ArrayList<>();
@@ -57,8 +62,6 @@ public class ChartServiceImpl implements ChartService {
             region.setPercentage(0.6);
             res.add(region);
         }
-
-
         return res;
 
     }
