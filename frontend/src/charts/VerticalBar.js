@@ -44,7 +44,7 @@ class BarChart extends React.Component{
   }
 
   getData(){
-    fetch('/v1/chart',{
+    fetch('http://172.26.133.151:8080/v1/chart',{
       method:'GET',
       headers : { 
         'Content-Type': 'application/json',
