@@ -1,8 +1,13 @@
+from nltk.tokenize import sent_tokenize
 import tweepy
 import pandas as pd
 import couchdb
 import argparse
 import json
+from TwitterAPI.TwitterAPI import TwitterAPI
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
+import nltk
+from textblob import TextBlob
 
 
 # apis = [{'consumer_key' : 'ZYS7ukLD70hVtrFQd8AOnu56M',
@@ -30,6 +35,40 @@ def get_args():
     
     return args
 
+def dataprocess(data, q):
+    ans = {}
+    ans["keyword"] = q
+    ans["tweet_id"] = data["id"]
+    ans["created_at"] = data["created_at"]
+    ans["text"] = data["text"]
+    ans["user_id"] = data["user"]["id"]
+    ans["username"] = data["user"]["screen_name"]
+    ans["location"] = data["user"]["location"]
+    ans["geo"] = data["geo"]
+    ans["coordinates"] = data["coordinates"]
+    ans["place"] = data["place"]
+
+
+    # analysis = TextBlob(tweet)
+    score = SentimentIntensityAnalyzer().polarity_scores(data["text"])
+    neg = score['neg']
+    neu = score['neu']
+    pos = score['pos']
+
+    if neg > pos:
+        sentiment = "negative"
+    elif pos > neg:
+        sentiment = "positive"
+
+    elif pos == neg:
+        sentiment = "neutral"
+
+    ans["sentiment"] = sentiment
+
+    # ans["emotion"] = data["senpy"]["entries"][0]["onyx:hasEmotionSet"]
+
+
+    return ans
 
 def tweet_search(db, api, q, count):
     maxid = "9999999999999999999999999999"
@@ -38,17 +77,28 @@ def tweet_search(db, api, q, count):
         if count < 200:
             n = count
         count -= 200
-        try:
-            cursor = tweepy.Cursor(api.search, q=q, geocode= "-37.8390435045,145.106023031,201km", max_id=maxid).items(n)
-            tweets = []
-            for i in cursor:
-                # print(i._json['id'])
-                maxid = (i._json['id'])
-                tweets.append(i.text)
-                db.save(i._json)
-        except:
-            count += 200
-            pass
+        # try:
+
+            # for i in api.request("search/tweets", {"q": q, 
+            #                                   "count": 1, 
+            #                                   "geocode": "-37.8390435045,145.106023031,201km"}):
+            #     print(i)
+
+        cursor = tweepy.Cursor(api.search, q=q, lang="en", geocode= "-37.8390435045,145.106023031,201km", max_id=maxid).items(n)
+        
+        for i in cursor:
+
+            maxid = (i._json['id'])
+        
+            
+            db.save(dataprocess(i._json, q))
+        # except:
+        #     print("Exceed rate limit")
+        #     count += 200
+        #     pass
+
+
+
 
 
 def main():
@@ -59,6 +109,7 @@ def main():
     auth = tweepy.OAuthHandler(apis[1]['consumer_key'], apis[1]['consumer_secret'])
     auth.set_access_token(apis[1]['access_token'], apis[1]['access_token_secret'])
     api = tweepy.API(auth)
+    # api = TwitterAPI(apis[1]['consumer_key'], apis[1]['consumer_secret'], apis[1]['access_token'], apis[1]['access_token_secret'])
 
     try:
         # couch = couchdb.Server('http://sumengzhang:199784zsM@119.45.38.52:5984') # Local test db
