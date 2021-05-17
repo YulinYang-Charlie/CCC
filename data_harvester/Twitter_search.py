@@ -46,7 +46,35 @@ def dataprocess(data, q, loc):
     ans = {}
     ans["keyword"] = q
     ans["tweet_id"] = data["id"]
-    ans["created_at"] = data["created_at"]
+    date = data["created_at"].split()
+    month = "0"
+    if date[1] == "Jan":
+        month = "01"
+    elif date[1] == "Feb":
+        month = "02"
+    elif date[1] == "Mar":
+        month = "03"
+    elif date[1] == "Apr":
+        month = "04"
+    elif date[1] == "May":
+        month = "05"
+    elif date[1] == "Jun":
+        month = "06"
+    elif date[1] == "Jul":
+        month = "07"
+    elif date[1] == "Aug":
+        month = "08"
+    elif date[1] == "Sep":
+        month = "09"
+    elif date[1] == "Oct":
+        month = "10"
+    elif date[1] == "Nov":
+        month = "11"
+    else:
+        month = "12"
+        
+    ans["created_at"] = date[-1]+month+date[2]
+    # print(ans["created_at"])
     ans["text"] = data["text"]
     ans["user_id"] = data["user"]["id"]
     ans["username"] = data["user"]["screen_name"]
@@ -119,8 +147,8 @@ def main():
     # api = TwitterAPI(apis[1]['consumer_key'], apis[1]['consumer_secret'], apis[1]['access_token'], apis[1]['access_token_secret'])
 
     try:
-        couch = couchdb.Server('http://sumengzhang:199784zsM@119.45.38.52:5984') # Local test db
-        # couch = couchdb.Server('http://admin:admin@172.26.128.238:5984')
+        # couch = couchdb.Server('http://sumengzhang:199784zsM@119.45.38.52:5984') # Local test db
+        couch = couchdb.Server('http://admin:admin@172.26.128.238:5984')
         db = couch.create(args.db)
     except couchdb.http.PreconditionFailed:
         db = couch[args.db]
