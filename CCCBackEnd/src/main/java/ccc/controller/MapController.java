@@ -3,6 +3,7 @@ package ccc.controller;
 import ccc.pojo.Sofa;
 import org.ektorp.CouchDbConnector;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * Created by sumengzhang on 5/4/21 7:10 PM
  */
-
+@CrossOrigin
 @RestController
 @RequestMapping(value  = "/map")
 public class MapController {
