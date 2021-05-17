@@ -44,7 +44,7 @@ class DoughnutChart extends React.Component{
   }
 
   getData(){
-    fetch('http://172.26.133.151:8080/v1/chart',{
+    fetch('./testdata.json',{
       method:'GET',
       headers : { 
         'Content-Type': 'application/json',
@@ -53,10 +53,7 @@ class DoughnutChart extends React.Component{
       mode:'cors',
       cache:'default'
     })
-     .then(res => {
-       console.log(res);
-       res = res.json();
-     })
+     .then(res => res.json())
      .then((data) => {
        console.log('fetch data received')
        this.setState({

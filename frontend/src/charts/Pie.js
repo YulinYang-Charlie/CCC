@@ -44,7 +44,7 @@ class PieChart extends React.Component{
   }
 
   getData(){
-    fetch('http://172.26.133.151:8080/v1/chart',{
+    fetch('./testdata.json',{
       method:'GET',
       headers : { 
         'Content-Type': 'application/json',
