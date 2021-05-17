@@ -113,4 +113,19 @@ public class ChartsServiceImpl implements ChartsService {
         }
         return list;
     }
+
+    @Override
+    public List<Map<String,Integer>> getTweetsByKeyword(String keyword) {
+        List<Map<String,Integer>>  list = new ArrayList<>();
+        for(String location:locations){
+           Map<String,Integer> curMap = sofaRepository.findByKeywordAndLocation(location,keyword);
+           list.add(curMap);
+        }
+        return list;
+    }
+
+    @Override
+    public List<Region> getTweetsCountByDateAndKeyword(String date, String keyword) {
+        return null;
+    }
 }

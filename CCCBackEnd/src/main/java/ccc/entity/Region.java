@@ -2,6 +2,8 @@ package ccc.entity;
 
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 /**
  * Created by sumengzhang on 5/5/21 9:06 PM
  */
@@ -30,6 +32,7 @@ public class Region {
     private String name;
     private long total;
     private double percentage;
+    private List<Integer> sentiment;
 
 
     public String getName() {
@@ -54,5 +57,13 @@ public class Region {
 
     public void setPercentage(double percentage) {
         this.percentage = percentage;
+    }
+
+    public List<Integer> getSentiment() {
+        return sentiment;
+    }
+
+    public void setSentiment(List<Integer> sentiment) {
+        this.sentiment = sentiment;
     }
 }
