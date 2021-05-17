@@ -11,6 +11,16 @@ import java.util.List;
 
 public interface ChartsService {
 
+    /**
+     * fake data for testing
+     * @return
+     */
     public List<Region> getPureStatistics();
+
+
+    /**
+     *
+     */
+    public List<Region> getTwittersCountByLocation(String locationNameOrNull);
 
 }

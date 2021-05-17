@@ -38,7 +38,7 @@ public class HelloController {
     @ResponseBody
     public Object findByLocation(){
         //SofaRepository sofaRepository = new SofaRepository(db);
-        return sofaRepository.findByLocation("Coodabeens");
+        return sofaRepository.findByLocation("Victoria");
     }
 
     @RequestMapping(value = "/name",method = RequestMethod.GET)

@@ -9,12 +9,13 @@ import org.springframework.stereotype.Component;
 public class Region {
 
     public enum regionName{
-        Victoria("victoria"),
-        NewSouthWales("new south wales"),
-        Queensland("queensland"),
-        Tasmania("tasmania"),
-        WesternAustralia("western australia"),
-        SouthAustralia("south australia");
+        Victoria("Victoria"),
+        NewSouthWales("New south wales"),
+        Queensland("Queensland"),
+        Tasmania("Tasmania"),
+        WesternAustralia("Western australia"),
+        SouthAustralia("South australia"),
+        NorthernTerritory("Northern territory");
         private String name;
 
         regionName(String name) {

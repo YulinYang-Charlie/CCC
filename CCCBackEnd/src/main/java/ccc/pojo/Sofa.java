@@ -46,7 +46,7 @@ public class Sofa {
     @JsonProperty("sentiment")
     private String sentiment;
 
-    private String emotion;
+//    private String emotion;
 
     public String getId() {
         return id;
@@ -128,13 +128,13 @@ public class Sofa {
         this.place = place;
     }
 
-    public String getEmotion() {
-        return emotion;
-    }
-
-    public void setEmotion(String emotion) {
-        this.emotion = emotion;
-    }
+//    public String getEmotion() {
+//        return emotion;
+//    }
+//
+//    public void setEmotion(String emotion) {
+//        this.emotion = emotion;
+//    }
 
     public String getCreatedDate() {
         return createdDate;
