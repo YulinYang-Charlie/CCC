@@ -1,8 +1,8 @@
 import React from 'react';
-import { Doughnut } from 'react-chartjs-2';
+import { Bar } from 'react-chartjs-2';
 
 
-class DoughnutChart extends React.Component{
+class BarChart extends React.Component{
   constructor(props){
     super(props)
     this.state={
@@ -53,7 +53,7 @@ class DoughnutChart extends React.Component{
       mode:'cors',
       cache:'default'
     })
-     .then(res => res.json())
+     .then(res =>res.json())
      .then((data) => {
        console.log('fetch data received')
        this.setState({
@@ -82,12 +82,12 @@ class DoughnutChart extends React.Component{
     else return (
       <>
       <div className='header'>
-        <h1 className='title'>Doughnut Chart</h1>
+        <h1 className='title'>Bar Chart</h1>
       </div>
-      <Doughnut data={datas} />
+      <Bar data={datas} />
     </>
     )
   }
 }
 
-export default DoughnutChart;
+export default BarChart;
