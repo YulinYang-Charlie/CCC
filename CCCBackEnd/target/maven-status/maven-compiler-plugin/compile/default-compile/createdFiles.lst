@@ -16,3 +16,4 @@ ccc/config/CORSFilter.class
 ccc/entity/Hello.class
 ccc/service/serviceImp/ChartsServiceImpl.class
 ccc/entity/LocationEntity.class
+ccc/entity/Param.class

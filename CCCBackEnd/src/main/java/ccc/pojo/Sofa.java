@@ -35,13 +35,13 @@ public class Sofa {
     private String location;
 
     @JsonProperty("geo")
-    private String geo;
+    private Object geo;
 
     @JsonProperty("coordinates")
-    private String coordinates;
+    private Object coordinates;
 
     @JsonProperty("place")
-    private String place;
+    private Object place;
 
     @JsonProperty("sentiment")
     private String sentiment;
@@ -104,31 +104,31 @@ public class Sofa {
         this.location = location;
     }
 
-    public String getGeo() {
+    public Object getGeo() {
         return geo;
     }
 
-    public void setGeo(String geo) {
+    public void setGeo(Object geo) {
         this.geo = geo;
     }
 
-    public String getCoordinates() {
+    public Object getCoordinates() {
         return coordinates;
     }
 
-    public void setCoordinates(String coordinates) {
+    public void setCoordinates(Object coordinates) {
         this.coordinates = coordinates;
     }
 
-    public String getPlace() {
+    public Object getPlace() {
         return place;
     }
 
-    public void setPlace(String place) {
+    public void setPlace(Object place) {
         this.place = place;
     }
 
-//    public String getEmotion() {
+    //    public String getEmotion() {
 //        return emotion;
 //    }
 //

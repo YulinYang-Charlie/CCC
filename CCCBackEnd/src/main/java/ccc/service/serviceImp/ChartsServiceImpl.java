@@ -88,7 +88,7 @@ public class ChartsServiceImpl implements ChartsService {
         int total = 0;
         // TODO: multi times IO, should get all data one time?
         for(String location:locations){
-            int tweetsCount = sofaRepository.findByLocation(location);
+            int tweetsCount = sofaRepository.findByLocation(location).size();
             countMap.put(location,tweetsCount);
             total+=tweetsCount;
         }
@@ -115,17 +115,110 @@ public class ChartsServiceImpl implements ChartsService {
     }
 
     @Override
-    public List<Map<String,Integer>> getTweetsByKeyword(String keyword) {
-        List<Map<String,Integer>>  list = new ArrayList<>();
+    public Map<String,Map<String,Object>> getTweetsByKeyword(String keyword) {
+        //List<Map<String,Integer>>  list = new ArrayList<>();
+        Map<String,Map<String,Integer>> curMap = sofaRepository.findByKeywordAndLocation(keyword);
+        int totalTweets = 0;
+        Map<String,Map<String,Object>> resMap = new HashMap<>();
         for(String location:locations){
-           Map<String,Integer> curMap = sofaRepository.findByKeywordAndLocation(location,keyword);
-           list.add(curMap);
+            Map<String,Object> map = new HashMap<>();
+           // Get <Region,<Sentiment,Count>>
+            Map<String,Integer> sentiMap = curMap.get(location);
+            int posiNum = 0;
+            if(sentiMap.containsKey("positive")){
+                posiNum = sentiMap.get("positive");
+            }
+            int negNum = 0;
+            if(sentiMap.containsKey("negative")){
+                negNum = sentiMap.get("negative");
+            }
+            int neuNum  = 0;
+            if(sentiMap.containsKey("neutral")){
+                neuNum = sentiMap.get("neutral");
+            }
+            List<Integer> sentimentList = new ArrayList<>();
+            sentimentList.add(posiNum);
+            sentimentList.add(neuNum);
+            sentimentList.add(negNum);
+            map.put("name",location);
+            map.put("count",posiNum+negNum+neuNum);
+            map.put("emotions",sentimentList);
+            totalTweets +=(posiNum+negNum+neuNum);
+            resMap.put(location,map);
         }
-        return list;
+        for(String location:locations){
+            Map<String,Object> map = resMap.get(location);
+            map.put("percentage",Double.valueOf((int)map.get("count")/(double)totalTweets));
+            resMap.put(location,map);
+        }
+
+        return resMap;
     }
 
     @Override
-    public List<Region> getTweetsCountByDateAndKeyword(String date, String keyword) {
-        return null;
+    public Map<String,Map<String,Object>> getTweetsCountByDateAndKeyword(String date, String keyword) {
+        Map<String,Map<String,Integer>> curMap = sofaRepository.getTweetsCountByDateAndKeyword(date,keyword);
+        Map<String,Map<String,Object>> resMap = new HashMap<>();
+        int totalTweets = 0;
+        for(String location:locations){
+            Map<String,Object> map = new HashMap<>();
+            // Get <Region,<Sentiment,Count>>
+            Map<String,Integer> sentiMap = curMap.get(location);
+            int posiNum = 0;
+            if(sentiMap.containsKey("positive")){
+                posiNum = sentiMap.get("positive");
+            }
+            int negNum = 0;
+            if(sentiMap.containsKey("negative")){
+                negNum = sentiMap.get("negative");
+            }
+            int neuNum  = 0;
+            if(sentiMap.containsKey("neutral")){
+                neuNum = sentiMap.get("neutral");
+            }
+            List<Integer> sentimentList = new ArrayList<>();
+            sentimentList.add(posiNum);
+            sentimentList.add(neuNum);
+            sentimentList.add(negNum);
+            map.put("name",location);
+            map.put("count",posiNum+negNum+neuNum);
+            map.put("emotions",sentimentList);
+            totalTweets +=(posiNum+negNum+neuNum);
+            resMap.put(location,map);
+
+        }
+        for(String location:locations){
+            Map<String,Object> map = resMap.get(location);
+            map.put("percentage",Double.valueOf((int)map.get("count")/(double)totalTweets));
+            map.put("date",date);
+            resMap.put(location,map);
+
+        }
+        return resMap;
     }
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

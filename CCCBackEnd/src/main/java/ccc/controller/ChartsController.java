@@ -47,32 +47,27 @@ public class ChartsController {
         return chartsService.getTwittersCountByLocation(locationName);
     }
 
-
-
     /**
      *  无时间 各个地区的特定主题推特总数/比例
      */
     @ApiOperation("无时间 各个地区的特定主题推特总数/比例")
     @RequestMapping(value = "/getTweetsByKeyword", method = RequestMethod.POST)
-    public List<Map<String,Integer>> getTweetCountByKeyword(@RequestBody Param param){
+    public Map<String,Map<String,Object>> getTweetCountByKeyword(@RequestBody Param param){
         String keyword  = param.getKeyword();
         return chartsService.getTweetsByKeyword(keyword);
     }
-
 
     /**
      * 有起止时间 有地区选项的特定主题推特总数/比例
      */
     @ApiOperation("有起止时间 有地区选项的特定主题推特总数/比例")
     @RequestMapping(value = "/getTweetsCountByDateAndkeyword",method = RequestMethod.POST)
-    public List<Region> getTweetsCountByDateAndKeyword(@RequestBody Param param){
+    public Map<String,Map<String,Object>> getTweetsCountByDateAndKeyword(@RequestBody Param param){
         String keyword = param.getKeyword();
         String date = param.getDate();
         return chartsService.getTweetsCountByDateAndKeyword(date,keyword);
 
     }
-
-
 
 
 

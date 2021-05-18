@@ -24,7 +24,7 @@ public interface ChartsService {
      */
     public List<Region> getTwittersCountByLocation(String locationNameOrNull);
 
-    List<Map<String,Integer>> getTweetsByKeyword(String keyword);
+    Map<String,Map<String,Object>> getTweetsByKeyword(String keyword);
 
-    List<Region> getTweetsCountByDateAndKeyword(String date, String keyword);
+    Map<String,Map<String,Object>> getTweetsCountByDateAndKeyword(String date, String keyword);
 }
