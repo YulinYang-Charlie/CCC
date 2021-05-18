@@ -14,8 +14,10 @@ import MultiType from './charts/MultiType'
 import ClickEvents from './charts/ClickEvents'
 import GoogleApiWrapper from './charts/Map'
 import { Link } from 'react-router-dom'
+import App from './App';
 
-const App = () => (
+// eslint-disable-next-line
+const Appp = () => (
   <Router>
     <div className='content'>
       <div className='header'>
@@ -79,4 +81,9 @@ const App = () => (
   </Router>
 )
 
-ReactDOM.render(<App />, document.getElementById('root'))
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById('root')
+);
