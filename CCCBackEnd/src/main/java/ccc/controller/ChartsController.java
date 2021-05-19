@@ -1,7 +1,6 @@
 package ccc.controller;
 
-import ccc.entity.Param;
-import ccc.entity.Region;
+import ccc.entity.*;
 import ccc.service.ChartsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -42,7 +41,7 @@ public class ChartsController {
      */
     @ApiOperation("get tweets by location name")
     @RequestMapping(value= "/getTweetCountByLocation",method = RequestMethod.POST)
-    public List<Region> getTweetCountByLocation(@RequestBody Param param){
+    public List<Region> getTweetCountByLocation(@RequestBody ParamByLocation param){
         String locationName  = param.getLocation();
         return chartsService.getTwittersCountByLocation(locationName);
     }
@@ -52,7 +51,7 @@ public class ChartsController {
      */
     @ApiOperation("无时间 各个地区的特定主题推特总数/比例")
     @RequestMapping(value = "/getTweetsByKeyword", method = RequestMethod.POST)
-    public Map<String,Map<String,Object>> getTweetCountByKeyword(@RequestBody Param param){
+    public Map<String,Map<String,Object>> getTweetCountByKeyword(@RequestBody ParamByKeyword param){
         String keyword  = param.getKeyword();
         return chartsService.getTweetsByKeyword(keyword);
     }
@@ -60,12 +59,21 @@ public class ChartsController {
     /**
      * 有起止时间 有地区选项的特定主题推特总数/比例
      */
-    @ApiOperation("有起止时间 有地区选项的特定主题推特总数/比例")
+    @ApiOperation("有确定时间 有地区选项的特定主题推特总数/比例")
     @RequestMapping(value = "/getTweetsCountByDateAndkeyword",method = RequestMethod.POST)
-    public Map<String,Map<String,Object>> getTweetsCountByDateAndKeyword(@RequestBody Param param){
+    public Map<String,Map<String,Object>> getTweetsCountByDateAndKeyword(@RequestBody ParamByDateAndLocation param){
         String keyword = param.getKeyword();
         String date = param.getDate();
         return chartsService.getTweetsCountByDateAndKeyword(date,keyword);
+    }
+
+    @ApiOperation("有时间段  有地区选项的特定主题推特总数/比例")
+    @RequestMapping(value = "/getTweetsCountByStartEndDateAndKeyword",method = RequestMethod.POST)
+    public Map<String,Map<String,Object>> getTweetsCountByStartEndDateAndKeyword(@RequestBody ParamByDatesAndKeyword param){
+        String keyword = param.getKeyword();
+        String startDate = param.getStartDate();
+        String endDate  = param.getEndDate();
+        return chartsService.getTweetsByDatesAndKeyword(keyword,startDate,endDate);
 
     }
 

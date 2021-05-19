@@ -1,13 +1,10 @@
 package ccc.controller;
 
 import ccc.entity.SofaRepository;
-import ccc.pojo.Sofa;
 import ccc.service.HelloService;
 import org.ektorp.CouchDbConnector;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 /**
  * Created by sumengzhang on 4/15/21 9:41 PM
@@ -26,12 +23,7 @@ public class HelloController {
     @Autowired
     private SofaRepository sofaRepository;
 
-    @RequestMapping(value = "/hello", method = RequestMethod.GET)
-    @ResponseBody
-    public Object hello(){
-         //SofaRepository sofaRepository  = new SofaRepository(db);
-         return sofaRepository.getAverageSofaSize();
-    }
+
 
 
     @RequestMapping(value = "/location",method = RequestMethod.GET)
@@ -40,12 +32,7 @@ public class HelloController {
         return null;
     }
 
-    @RequestMapping(value = "/name",method = RequestMethod.GET)
-    @ResponseBody
-    public List<Sofa> getByName(){
-        //SofaRepository sofaRepository = new SofaRepository(db);
-        return  sofaRepository.findByUsername("c_eid86");
-    }
+
 
 
 

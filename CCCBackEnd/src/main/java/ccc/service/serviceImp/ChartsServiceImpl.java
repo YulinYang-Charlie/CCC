@@ -6,10 +6,7 @@ import ccc.service.ChartsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by sumengzhang on 5/14/21 11:03 PM
@@ -84,12 +81,12 @@ public class ChartsServiceImpl implements ChartsService {
     @Override
     public List<Region> getTwittersCountByLocation(String locationName) {
         List<Region> list  = new ArrayList<>();
-        Map<String,Integer> countMap = new HashMap<>();
+        Map<String,Integer> countMap = sofaRepository.findByLocation();
+
         int total = 0;
         // TODO: multi times IO, should get all data one time?
         for(String location:locations){
-            int tweetsCount = sofaRepository.findByLocation(location).size();
-            countMap.put(location,tweetsCount);
+            int tweetsCount = countMap.get(location);
             total+=tweetsCount;
         }
         // if the locationName is not null, it means that we need to reply a specific data;
@@ -198,6 +195,52 @@ public class ChartsServiceImpl implements ChartsService {
     }
 
 
+    @Override
+    public Map<String, Map<String, Object>> getTweetsByDatesAndKeyword(String keyword, String startDate, String endDate) {
+        Map<String,Map<String,Object>> resultMap = new HashMap<>();
+
+        Map<String,List<ArrayList>> map = sofaRepository.getTweetsCountByDatesAndKeywrod(keyword,startDate,endDate);
+        Iterator it = map.entrySet().iterator();
+        Map<String,Map<String,Integer>> resMap = new HashMap<>();
+        for(String location:locations){
+            resMap.put(location,new HashMap<String,Integer>());
+        }
+        int totalTweets = 0;
+        while(it.hasNext()){
+            Map.Entry entry = (Map.Entry)it.next();
+            String curDate = (String)entry.getKey();
+            List<ArrayList> curList = (List<ArrayList>)entry.getValue();
+            totalTweets += curList.size();
+            for (ArrayList list :curList){
+                String location  = (String)list.get(0);
+                Map<String,Integer> curMap = resMap.get(location);
+                String sentiment = (String)list.get(1);
+                curMap.put(sentiment,(curMap.getOrDefault(sentiment,0)+1));
+                resMap.put(location,curMap);
+
+            }
+
+        }
+        for(String location:locations){
+            Map<String,Object> curRes = new HashMap<>();
+            Map<String,Integer> curMap = resMap.get(location);
+            int posiNum = curMap.getOrDefault("positive",0);
+            int negNum = curMap.getOrDefault("negative",0);
+            int neuNum = curMap.getOrDefault("neutral",0);
+            int total  = posiNum+negNum+neuNum;
+            List<Integer> sentiList = new ArrayList<>();
+            sentiList.add(posiNum);
+            sentiList.add(neuNum);
+            sentiList.add(negNum);
+            curRes.put("total",total);
+            curRes.put("emotion",sentiList);
+            curRes.put("percentage",(double)total/totalTweets);
+            curRes.put("name",location);
+            resultMap.put(location,curRes);
+        }
+
+        return resultMap;
+    }
 }
 
 
