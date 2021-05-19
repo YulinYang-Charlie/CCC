@@ -4,7 +4,7 @@ import pandas as pd
 import couchdb
 import argparse
 import json
-import threading
+
 from tweepy.streaming import StreamListener
 import time
 
