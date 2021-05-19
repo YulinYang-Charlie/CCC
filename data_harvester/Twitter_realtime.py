@@ -100,7 +100,7 @@ def dataprocess(data):
     ans["location"] = data["user"]["location"]
     ans["geo"] = data["geo"]
     ans["coordinates"] = data["coordinates"]
-    ans["place"] = data["place"]
+    ans["place"] = data["place"]['name']
 
 
     # analysis = TextBlob(tweet)
@@ -184,7 +184,7 @@ def main():
     while True:
         try:
             stream = tweepy.Stream(auth=streamauth, listener=Twitter_Stream(db))
-            stream.filter(locations=boundary)
+            stream.filter(locations=boundary,languages=["en"])
         except Exception as e:
             print(e)
             print('Disconnected...')
