@@ -170,8 +170,8 @@ def main():
         n += 1
 
     try:
-        # couch = couchdb.Server('http://sumengzhang:199784zsM@119.45.38.52:5984') # Local test db
-        couch = couchdb.Server('http://admin:admin@172.26.128.238:5984')
+        couch = couchdb.Server('http://sumengzhang:199784zsM@119.45.38.52:5984') # Local test db
+        # couch = couchdb.Server('http://admin:admin@172.26.128.238:5984')
         db = couch.create(args.db)
     except couchdb.http.PreconditionFailed:
         db = couch[args.db]
@@ -180,7 +180,7 @@ def main():
     # t2 = threading.Thread(target=tweet_user_timeline, args=(apis[1:], db))
 
     # t1.start()
-    t2.start()
+    # t2.start()
     while True:
         try:
             stream = tweepy.Stream(auth=streamauth, listener=Twitter_Stream(db))
