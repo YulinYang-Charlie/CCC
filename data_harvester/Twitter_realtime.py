@@ -92,7 +92,7 @@ def dataprocess(data):
     else:
         month = "12"
         
-    ans["created_at"] = date[-1]+month+date[2]
+    ans["created_at"] = date[-1]+month+date[2]+date[3][:2]
     # print(ans["created_at"])
     ans["text"] = data["text"]
     ans["user_id"] = data["user"]["id"]
