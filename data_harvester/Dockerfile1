@@ -1,0 +1,4 @@
+FROM harvestenv:1.0
+ADD Twitter_realtime.py /tmp/Twitter_realtime.py
+ADD api.json /api.json
+ENTRYPOINT ["python","/tmp/Twitter_realtime.py","-db","testdemo01"]
