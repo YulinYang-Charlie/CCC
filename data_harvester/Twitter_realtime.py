@@ -8,10 +8,10 @@ import json
 from tweepy.streaming import StreamListener
 import time
 
-from nltk.sentiment.vader import SentimentIntensityAnalyzer
-import nltk
-nltk.download('vader_lexicon')
-from textblob import TextBlob
+# from nltk.sentiment.vader import SentimentIntensityAnalyzer
+# import nltk
+# nltk.download('vader_lexicon')
+# from textblob import TextBlob
 
 
 # apis = [{'consumer_key' : 'ZYS7ukLD70hVtrFQd8AOnu56M',
@@ -105,20 +105,20 @@ def dataprocess(data):
 
 
     # analysis = TextBlob(tweet)
-    score = SentimentIntensityAnalyzer().polarity_scores(data["text"])
-    neg = score['neg']
-    neu = score['neu']
-    pos = score['pos']
+    # score = SentimentIntensityAnalyzer().polarity_scores(data["text"])
+    # neg = score['neg']
+    # neu = score['neu']
+    # pos = score['pos']
 
-    if neg > pos:
-        sentiment = "negative"
-    elif pos > neg:
-        sentiment = "positive"
+    # if neg > pos:
+    #     sentiment = "negative"
+    # elif pos > neg:
+    #     sentiment = "positive"
 
-    elif pos == neg:
-        sentiment = "neutral"
+    # elif pos == neg:
+    #     sentiment = "neutral"
 
-    ans["sentiment"] = sentiment
+    # ans["sentiment"] = sentiment
 
     for i in ans.keys():
         if ans[i] == "null":
