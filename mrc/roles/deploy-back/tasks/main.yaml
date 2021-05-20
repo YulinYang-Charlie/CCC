@@ -25,18 +25,12 @@
    args:
      chdir: CCC/CCCBackEnd
 
-- name:  create basic image
-    shell: docker build -f Dockerfile -t harvestenv:1.0
-    args:  
-      chdir: CCC/data_harvest
+#  - name:  create basic image
+#    shell: docker build -f Dockerfile -t harvestenv:1.0 .
+#    args:  
+#      chdir: CCC/data_harvester
 
- - name: create app image
-    shell: docker build -f Dockerfile01 -t harvest:3.0
-    args:
-      chdir: CCC/data_harvest
 
-  - name: run image
-    shell: docker run -d --name {{container_name}} harvest:3.0
 
 
    

@@ -1,10 +1,13 @@
 ---
-  - name: stop old containers
-    shell: docker stop {{container_name}}
+  - name: pip install harvest environment from requirements.txt
+    shell: pip install -r requirements
+    args:
+      chdir: CCC/data_harvester
   
-  - name: remove old happ
-    shell: docker rm {{container_name}}
-
-  - name: restart image
-    shell: docker run -d --name {{container_name}} harvest:3.0
+  - name: run python scripts for real time data
+    shell: python3 Twitter_realtime.py -db realtimedata
+    args:
+      chdir: CCC/data_harvester
+  
+  
       
