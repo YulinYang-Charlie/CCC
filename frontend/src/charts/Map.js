@@ -2,8 +2,8 @@ import React from 'react';
 import { Map, GoogleApiWrapper } from 'google-maps-react';
 
 const mapStyles = {
-  width: '42%',
-  height: '42%'
+  width: '100%',
+  height: '100%',
 };
 
 export class MapContainer extends React.Component {
@@ -40,6 +40,12 @@ export class MapContainer extends React.Component {
   render() {
     console.log('rendering...')
     return (
+      <div style={{
+        display:'flex',
+        alignContent:'center',
+        justifyContent:'center',
+        left: '100px'
+      }}>
       <Map
         google={this.props.google}
         zoom={8}
@@ -52,6 +58,7 @@ export class MapContainer extends React.Component {
         }
         onReady={this.autoCenterMap}
       />
+      </div>
     );
   }
 }
