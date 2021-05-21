@@ -8,6 +8,7 @@ import org.ektorp.CouchDbConnector;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -64,6 +65,7 @@ public class ChartsController {
     public Map<String,Map<String,Object>> getTweetsCountByDateAndKeyword(@RequestBody ParamByDateAndLocation param){
         String keyword = param.getKeyword();
         String date = param.getDate();
+
         return chartsService.getTweetsCountByDateAndKeyword(date,keyword);
     }
 
@@ -73,9 +75,26 @@ public class ChartsController {
         String keyword = param.getKeyword();
         String startDate = param.getStartDate();
         String endDate  = param.getEndDate();
+        if(keyword.length()==0||startDate.length()==0||endDate.length()==0){
+            System.out.println("parameter wrong");
+            Map<String,Map<String,Object>> map = new HashMap<>();
+            Map<String,Object> res = new HashMap<>();
+            res.put("reason",new String("invalid parameter"));
+            map.put("Error",res);
+            return map;
+        }
         return chartsService.getTweetsByDatesAndKeyword(keyword,startDate,endDate);
 
     }
+
+    @ApiOperation("Get tweets counts real time by 00-24")
+    @RequestMapping(value = "/getRealTimeTweetsCount",method = RequestMethod.GET)
+    public Map<String,Integer> getRealTimeTweetsCount(){
+        return chartsService.getRealTimeTweetsCount();
+    }
+
+
+
 
 
 

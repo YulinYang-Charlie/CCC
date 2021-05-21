@@ -2,6 +2,7 @@ package ccc.service.serviceImp;
 
 import ccc.entity.Region;
 import ccc.entity.SofaRepository;
+import ccc.entity.SofaRepositoryReal;
 import ccc.service.ChartsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,9 @@ public class ChartsServiceImpl implements ChartsService {
 
     @Autowired
     private SofaRepository sofaRepository;
+
+    @Autowired
+    private SofaRepositoryReal sofaRepositoryReal;
 
     private final String[] locations= {"Victoria","New south wales","Queensland","Tasmania","Western australia","South australia","Northern territory"};
     /**
@@ -240,6 +244,11 @@ public class ChartsServiceImpl implements ChartsService {
         }
 
         return resultMap;
+    }
+
+    @Override
+    public Map<String, Integer> getRealTimeTweetsCount() {
+        return sofaRepositoryReal.getRealTimeTweetsCount();
     }
 }
 

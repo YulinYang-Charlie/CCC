@@ -29,4 +29,6 @@ public interface ChartsService {
     Map<String,Map<String,Object>> getTweetsCountByDateAndKeyword(String date, String keyword);
 
     Map<String, Map<String, Object>> getTweetsByDatesAndKeyword(String keyword, String startDate, String endDate);
+
+    Map<String, Integer> getRealTimeTweetsCount();
 }

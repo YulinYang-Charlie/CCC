@@ -10,6 +10,7 @@ import org.ektorp.impl.StdCouchDbInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 
 /**
  * Created by sumengzhang on 4/20/21 11:55 PM
@@ -22,6 +23,7 @@ public class CouchDBConfig {
     private CouchDbInfo couchDBInfo;
 
     @Bean(name = "CouchDbConnector")
+    @Primary
     public CouchDbConnector couchDbConnector() throws Exception {
         System.out.println("Begin to connect couchdb: "+couchDBInfo.getHost()+"......");
         HttpClient httpClient = new StdHttpClient.Builder().url(couchDBInfo.getHost() + ":"+ couchDBInfo.getPort())
@@ -33,6 +35,11 @@ public class CouchDBConfig {
         System.out.println("Connect database successfully"+couchDBInfo.getHost());
         return couchDbConnector;
     }
+
+
+
+
+
 
 
 }

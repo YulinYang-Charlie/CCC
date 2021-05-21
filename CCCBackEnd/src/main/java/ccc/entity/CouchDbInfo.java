@@ -19,6 +19,16 @@ public class CouchDbInfo {
     private String username;
     @Value(value = "${couchdb.password}")
     private String password;
+    @Value(value = "${couchdb.database.real}")
+    private String databaseReal;
+
+    public String getDatabaseReal() {
+        return databaseReal;
+    }
+
+    public void setDatabaseReal(String databaseReal) {
+        this.databaseReal = databaseReal;
+    }
 
     public String getHost() {
         return host;
