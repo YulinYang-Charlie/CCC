@@ -101,7 +101,10 @@ def dataprocess(data):
     ans["location"] = data["user"]["location"]
     ans["geo"] = data["geo"]
     ans["coordinates"] = data["coordinates"]
-    ans["place"] = data["place"]['name']
+    if "name" in data['place'].keys():
+        ans["place"] = data["place"]["name"]
+    else:
+        ans["place"] = data["place"]
 
 
     # analysis = TextBlob(tweet)
@@ -171,7 +174,7 @@ def main():
         n += 1
 
     try:
-        #couch = couchdb.Server('http://sumengzhang:199784zsM@119.45.38.52:5984') # Local test db
+        # couch = couchdb.Server('http://sumengzhang:199784zsM@119.45.38.52:5984') # Local test db
         couch = couchdb.Server('http://admin:admin@172.26.128.238:5984')
         db = couch.create(args.db)
     except couchdb.http.PreconditionFailed:
