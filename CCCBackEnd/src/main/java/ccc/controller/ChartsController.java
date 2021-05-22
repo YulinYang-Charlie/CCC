@@ -71,15 +71,15 @@ public class ChartsController {
 
     @ApiOperation("有时间段  有地区选项的特定主题推特总数/比例")
     @RequestMapping(value = "/getTweetsCountByStartEndDateAndKeyword",method = RequestMethod.POST)
-    public Map<String,Map<String,Object>> getTweetsCountByStartEndDateAndKeyword(@RequestBody ParamByDatesAndKeyword param){
+    public Map<String,Map<String,Map<String,Object>>> getTweetsCountByStartEndDateAndKeyword(@RequestBody ParamByDatesAndKeyword param){
         String keyword = param.getKeyword();
         String startDate = param.getStartDate();
         String endDate  = param.getEndDate();
         if(keyword.length()==0||startDate.length()==0||endDate.length()==0){
             System.out.println("parameter wrong");
-            Map<String,Map<String,Object>> map = new HashMap<>();
-            Map<String,Object> res = new HashMap<>();
-            res.put("reason",new String("invalid parameter"));
+            Map<String,Map<String,Map<String,Object>>> map = new HashMap<>();
+            Map<String,Map<String,Object>> res = new HashMap<>();
+            res.put("reason",new HashMap<>());
             map.put("Error",res);
             return map;
         }

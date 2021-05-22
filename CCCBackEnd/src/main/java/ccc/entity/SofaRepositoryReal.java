@@ -45,33 +45,60 @@ public class SofaRepositoryReal extends CouchDbRepositorySupport<Sofa> {
         Calendar cal = Calendar.getInstance();
         cal.setTimeZone(TimeZone.getTimeZone("Australia/Melbourne"));
         int day = cal.get(Calendar.DATE);
-        cal.set(Calendar.DATE, day-1);
+        cal.set(Calendar.DATE, day-2);
         String lastDay = sdf.format(cal.getTime());
 
-        Map<String,Integer> resMap = new HashMap<>();
+        Map<String,Integer> resMap = new LinkedHashMap<>();
+        String keyName = "";
         for(int i = 0;i<24;i++){
-            resMap.put(""+i,0);
-            String keyName = "";
-            if(i<12){
-                int curTime  = i+12;
-                keyName = lastDay+curTime;
-
+              keyName = lastDay;
+            if(i<10){
+                keyName  = keyName+"0"+i;
             }else{
-                int curTime = i-12;
-                if(curTime<10){
-                    keyName = createdAtDate+"0"+curTime;
-                }else{
-                    keyName = createdAtDate+curTime;
-                }
+                keyName = keyName+i;
             }
 
             ViewQuery query = new ViewQuery().designDocId("_design/Sofa").viewName("by_realtime").key(keyName).reduce(true);
             ViewResult r = db.queryView(query);
             if(!r.isEmpty()&&r.iterator().hasNext()){
-                resMap.put(""+(i-2),Integer.valueOf(r.iterator().next().getValue()));
+
+                resMap.put(""+i,Integer.valueOf(r.iterator().next().getValue()));
+            }else{
+                resMap.put(""+i,0);
             }
+
         }
-        return resMap;
+        Map<String,Integer> finalMap = new LinkedHashMap<>();
+        int todayTime = hour;
+        for(int i = 23;i>=0;i--){
+            if(todayTime>=0){
+                int key = todayTime--;
+                finalMap.put(""+key,resMap.get(""+i));
+            }else{
+                int key = i+hour+1;
+                finalMap.put(""+key,resMap.get(""+i));
+            }
+
+        }
+        return finalMap;
+//        for(int i = 0;i<hour;i++){
+//           keyName  = createdAtDate;
+//            if(i<10){
+//                keyName  = keyName+"0"+i;
+//            }else{
+//                keyName = keyName+i;
+//            }
+//
+//            ViewQuery query = new ViewQuery().designDocId("_design/Sofa").viewName("by_realtime").key(keyName).reduce(true);
+//            ViewResult r = db.queryView(query);
+//            if(!r.isEmpty()&&r.iterator().hasNext()){
+//                if(i<10){
+//                    createdAtDate = createdAtDate+"0";
+//                }
+//                resMap.put(createdAtDate+""+i,Integer.valueOf(r.iterator().next().getValue()));
+//            }
+//        }
+
 
 
     }

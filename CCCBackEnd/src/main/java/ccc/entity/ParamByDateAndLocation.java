@@ -12,6 +12,7 @@ public class ParamByDateAndLocation {
     private String keyword;
 
 
+
     public String getDate() {
         return date;
     }

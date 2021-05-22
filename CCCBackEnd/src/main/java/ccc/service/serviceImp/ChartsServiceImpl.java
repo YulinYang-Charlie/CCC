@@ -137,7 +137,7 @@ public class ChartsServiceImpl implements ChartsService {
             if(sentiMap.containsKey("neutral")){
                 neuNum = sentiMap.get("neutral");
             }
-            List<Integer> sentimentList = new ArrayList<>();
+            List<Integer> sentimentList = new LinkedList<>();
             sentimentList.add(posiNum);
             sentimentList.add(neuNum);
             sentimentList.add(negNum);
@@ -177,7 +177,7 @@ public class ChartsServiceImpl implements ChartsService {
             if(sentiMap.containsKey("neutral")){
                 neuNum = sentiMap.get("neutral");
             }
-            List<Integer> sentimentList = new ArrayList<>();
+            List<Integer> sentimentList = new LinkedList<>();
             sentimentList.add(posiNum);
             sentimentList.add(neuNum);
             sentimentList.add(negNum);
@@ -200,9 +200,9 @@ public class ChartsServiceImpl implements ChartsService {
 
 
     @Override
-    public Map<String, Map<String, Object>> getTweetsByDatesAndKeyword(String keyword, String startDate, String endDate) {
+    public Map<String,Map<String,Map<String,Object>>> getTweetsByDatesAndKeyword(String keyword, String startDate, String endDate) {
         Map<String,Map<String,Object>> resultMap = new HashMap<>();
-
+        Map<String,Map<String,Map<String,Object>>> dateMap = new HashMap<>();
         Map<String,List<ArrayList>> map = sofaRepository.getTweetsCountByDatesAndKeywrod(keyword,startDate,endDate);
         Iterator it = map.entrySet().iterator();
         Map<String,Map<String,Integer>> resMap = new HashMap<>();
@@ -213,8 +213,10 @@ public class ChartsServiceImpl implements ChartsService {
         while(it.hasNext()){
             Map.Entry entry = (Map.Entry)it.next();
             String curDate = (String)entry.getKey();
+            // get today list
             List<ArrayList> curList = (List<ArrayList>)entry.getValue();
             totalTweets += curList.size();
+
             for (ArrayList list :curList){
                 String location  = (String)list.get(0);
                 Map<String,Integer> curMap = resMap.get(location);
@@ -223,27 +225,49 @@ public class ChartsServiceImpl implements ChartsService {
                 resMap.put(location,curMap);
 
             }
+            for(String location:locations){
+                Map<String,Object> curRes = new HashMap<>();
+                Map<String,Integer> curMap = resMap.get(location);
+                int posiNum = curMap.getOrDefault("positive",0);
+                int negNum = curMap.getOrDefault("negative",0);
+                int neuNum = curMap.getOrDefault("neutral",0);
+                int total  = posiNum+negNum+neuNum;
+                List<Integer> sentiList = new LinkedList<>();
+                sentiList.add(posiNum);
+                sentiList.add(neuNum);
+                sentiList.add(negNum);
+                curRes.put("total",total);
+                curRes.put("emotion",sentiList);
+                curRes.put("percentage",(double)total/totalTweets);
+                curRes.put("name",location);
+                resultMap.put(location,curRes);
+
+            }
+            dateMap.put(curDate,resultMap);
+
+
+
 
         }
-        for(String location:locations){
-            Map<String,Object> curRes = new HashMap<>();
-            Map<String,Integer> curMap = resMap.get(location);
-            int posiNum = curMap.getOrDefault("positive",0);
-            int negNum = curMap.getOrDefault("negative",0);
-            int neuNum = curMap.getOrDefault("neutral",0);
-            int total  = posiNum+negNum+neuNum;
-            List<Integer> sentiList = new ArrayList<>();
-            sentiList.add(posiNum);
-            sentiList.add(neuNum);
-            sentiList.add(negNum);
-            curRes.put("total",total);
-            curRes.put("emotion",sentiList);
-            curRes.put("percentage",(double)total/totalTweets);
-            curRes.put("name",location);
-            resultMap.put(location,curRes);
-        }
+//        for(String location:locations){
+//            Map<String,Object> curRes = new HashMap<>();
+//            Map<String,Integer> curMap = resMap.get(location);
+//            int posiNum = curMap.getOrDefault("positive",0);
+//            int negNum = curMap.getOrDefault("negative",0);
+//            int neuNum = curMap.getOrDefault("neutral",0);
+//            int total  = posiNum+negNum+neuNum;
+//            List<Integer> sentiList = new LinkedList<>();
+//            sentiList.add(posiNum);
+//            sentiList.add(neuNum);
+//            sentiList.add(negNum);
+//            curRes.put("total",total);
+//            curRes.put("emotion",sentiList);
+//            curRes.put("percentage",(double)total/totalTweets);
+//            curRes.put("name",location);
+//            resultMap.put(location,curRes);
+//        }
 
-        return resultMap;
+        return dateMap;
     }
 
     @Override

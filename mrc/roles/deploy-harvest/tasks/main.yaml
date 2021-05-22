@@ -4,8 +4,8 @@
     args:
       chdir: CCC/data_harvester
   
-  - name: run python scripts for real time data
-    shell: python3 Twitter_realtime.py -db realtimedata
+  - name: run python scripts for real time data（not recommed）
+    shell: python3 Twitter_realtime.py -db real
     args:
       chdir: CCC/data_harvester
   
