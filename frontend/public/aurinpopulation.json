@@ -1,0 +1,148 @@
+{
+
+    "population": [
+        {
+            "field1": "03/01/2018",
+            "New South Wales": "7956992",
+            "Victoria": "6432655",
+            "Queensland": "4988373",
+            "South Australia": "1733854",
+            "Western Australia": "2589816",
+            "Tasmania": "526921",
+            "Northern Territory": "246624",
+            "Australia": "24898631"
+        },
+        {
+            "field1": "06/01/2018",
+            "New South Wales": "7980168",
+            "Victoria": "6462019",
+            "Queensland": "5009424",
+            "South Australia": "1736527",
+            "Western Australia": "2594181",
+            "Tasmania": "528298",
+            "Northern Territory": "247058",
+            "Australia": "24982688"
+        },
+        {
+            "field1": "09/01/2018",
+            "New South Wales": "8013828",
+            "Victoria": "6498887",
+            "Queensland": "5030999",
+            "South Australia": "1741067",
+            "Western Australia": "2601177",
+            "Tasmania": "530194",
+            "Northern Territory": "246989",
+            "Australia": "25089700"
+        },
+        {
+            "field1": "12/01/2018",
+            "New South Wales": "8036665",
+            "Victoria": "6528601",
+            "Queensland": "5050651",
+            "South Australia": "1743594",
+            "Western Australia": "2606394",
+            "Tasmania": "531777",
+            "Northern Territory": "245796",
+            "Australia": "25171291"
+        },
+        {
+            "field1": "03/01/2019",
+            "New South Wales": "8069924",
+            "Victoria": "6572839",
+            "Queensland": "5075028",
+            "South Australia": "1749365",
+            "Western Australia": "2616528",
+            "Tasmania": "533599",
+            "Northern Territory": "245760",
+            "Australia": "25292967"
+        },
+        {
+            "field1": "06/01/2019",
+            "New South Wales": "8087379",
+            "Victoria": "6596880",
+            "Queensland": "5093884",
+            "South Australia": "1752681",
+            "Western Australia": "2623259",
+            "Tasmania": "534575",
+            "Northern Territory": "246143",
+            "Australia": "25365745"
+        },
+        {
+            "field1": "09/01/2019",
+            "New South Wales": "8115775",
+            "Victoria": "6633427",
+            "Queensland": "5116672",
+            "South Australia": "1757858",
+            "Western Australia": "2634491",
+            "Tasmania": "535787",
+            "Northern Territory": "246058",
+            "Australia": "25472528"
+        },
+        {
+            "field1": "12/01/2019",
+            "New South Wales": "8137628",
+            "Victoria": "6661640",
+            "Queensland": "5136910",
+            "South Australia": "1761474",
+            "Western Australia": "2645744",
+            "Tasmania": "538289",
+            "Northern Territory": "245199",
+            "Australia": "25559816"
+        },
+        {
+            "field1": "03/01/2020",
+            "New South Wales": "8163894",
+            "Victoria": "6692293",
+            "Queensland": "5163411",
+            "South Australia": "1769142",
+            "Western Australia": "2659871",
+            "Tasmania": "539957",
+            "Northern Territory": "245696",
+            "Australia": "25669140"
+        },
+        {
+            "field1": "06/01/2020",
+            "New South Wales": "8167532",
+            "Victoria": "6696670",
+            "Queensland": "5176186",
+            "South Australia": "1770375",
+            "Western Australia": "2663561",
+            "Tasmania": "540780",
+            "Northern Territory": "246143",
+            "Australia": "25697298"
+        },
+        {
+            "field1": "09/01/2020",
+            "New South Wales": "8166369",
+            "Victoria": "6680648",
+            "Queensland": "5184847",
+            "South Australia": "1770591",
+            "Western Australia": "2667130",
+            "Tasmania": "541071",
+            "Northern Territory": "246500",
+            "Australia": "25693059"
+        }
+    ],
+    "regionmigration":[
+        {"field1":"NSW","arrivals":"89873","departures":"110760"},
+        {"field1":"Vic.","arrivals":"77197","departures":"74954"},
+        {"field1":"Qld","arrivals":"101789","departures":"76441"},
+        {"field1":"SA","arrivals":"23726","departures":"25886"},
+        {"field1":"WA","arrivals":"29211","departures":"31621"},
+        {"field1":"Tas.","arrivals":"12962","departures":"11749"},
+        {"field1":"NT","arrivals":"13517","departures":"16214"},
+        {"field1":"ACT","arrivals":"20394","departures":"21044"}
+        ],
+    "capitalmigration": {
+        "Brisbane":13779,
+        "Perth":735,
+        "Hobart": -435,
+        "Canberra":-650,
+        "Darwin":-1864,
+        "Adelaide":-2387,
+        "Melbourne":-9266,
+        "Sydney":-30087
+    }
+
+
+}

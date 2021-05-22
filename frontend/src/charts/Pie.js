@@ -74,8 +74,9 @@ class PieChart extends React.Component{
     }
 
   render(){
-    const datas = this.state.chartData
-    console.log('start rendering')
+    const datas = this.state.chartData;
+    const {param} = this.props;
+    const {area, keyword} = param;
     if (this.state.loading) return (
       <div>
         Loading...
@@ -89,8 +90,8 @@ class PieChart extends React.Component{
           <h1 style={{
             fontSize: '135%'
           }}>
-          {this.state.area?(" in " + this.state.area):null} 
-          {this.state.keyword?(" about " + this.state.keyword):null} 
+          {area?(" in " + area):null} 
+          {keyword?(" about " + keyword):null} 
           </h1>
         </h1>
       </div>

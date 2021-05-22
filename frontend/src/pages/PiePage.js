@@ -7,8 +7,8 @@ class PiePage extends React.Component{
       this.state = {
         show: false,
         value: '',
-        keywords: ['mask', 'covid', 'pandemic', 'lockdown'],
-        areas: ['all', 'victoria', 'new south wales', 'queensland', 'tasmania', 
+        keywords: ['---', 'mask', 'covid', 'pandemic', 'lockdown'],
+        areas: ['---', 'all', 'victoria', 'new south wales', 'queensland', 'tasmania', 
         'western australia', 'northern territories', 'south australia'],
       };
       this.showChart = this.showChart.bind(this);
@@ -21,6 +21,7 @@ class PiePage extends React.Component{
         //默认值改变
         selectKeyword:event.target.value
       })
+      // alert("keyword changed: " + event.target.value);
     }
 
     getValueArea=(event)=>{
@@ -30,11 +31,16 @@ class PiePage extends React.Component{
         //默认值改变
         selectArea:event.target.value
       })
+      // alert("area changed: " + event.target.value);
     }
 
     showChart(){
       this.setState({
         show: true,
+        params: {
+          keyword: this.state.selectKeyword,
+          area: this.state.selectArea,
+        }
       });
     }
 
@@ -71,7 +77,7 @@ class PiePage extends React.Component{
         </div>
         {
           this.state.show?(
-            <div> <PieChart area={this.state.selectArea} keyword={this.state.selectKeyword}/> </div>
+            <div> <PieChart param={this.state.params}/> </div>
           ):null
         }
         </>
