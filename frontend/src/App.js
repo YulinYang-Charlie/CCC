@@ -13,8 +13,6 @@ import GoogleApiWrapper from "./charts/Map";
 import Dashboard from "./pages/Dashboard";
 import PiePage from "./pages/PiePage";
 
-import 'effect-dropdown-react/dist/index.css'
-
 function App() {
   return (
     <Router>

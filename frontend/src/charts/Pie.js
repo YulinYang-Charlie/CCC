@@ -6,6 +6,8 @@ class PieChart extends React.Component{
   constructor(props){
     super(props)
     this.state={
+      keyword: props.keyword,
+      area: props.area,
       loading:true,
       data:{},
       chartData:{
@@ -82,7 +84,15 @@ class PieChart extends React.Component{
     else return (
       <>
       <div className='header'>
-        <h1 className='title'>Pie Chart</h1>
+        <h1 className='title'>
+          Tweet counts
+          <h1 style={{
+            fontSize: '135%'
+          }}>
+          {this.state.area?(" in " + this.state.area):null} 
+          {this.state.keyword?(" about " + this.state.keyword):null} 
+          </h1>
+        </h1>
       </div>
       <Pie data={datas} />
     </>

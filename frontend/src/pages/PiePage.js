@@ -1,95 +1,45 @@
 import React from "react";
-import { Pie } from "react-chartjs-2";
+import PieChart from "../charts/Pie";
 
 class PiePage extends React.Component{
     constructor (props) {
-        super(props);
-        this.state = {
-            loading:true,
-            value: '',
-            keywords: ['mask', 'covid', 'pandemic', 'lockdown'],
-            areas: ['all', 'victoria', 'new south wales', 'queensland', 'tasmania', 
-            'western australia', 'northern territories', 'south australia'],
-            data:{},
-            chartData:{
-        labels:[],
-        datasets:
-        [
-          {
-          label: '# of tweets',
-          data: [],
-          backgroundColor: [
-           'rgba(255, 99, 132, 0.2)',
-           'rgba(54, 162, 235, 0.2)',
-           'rgba(255, 206, 86, 0.2)',
-           'rgba(75, 192, 192, 0.2)',
-           'rgba(153, 102, 255, 0.2)',
-           'rgba(255, 159, 64, 0.2)',
-          ],
-          borderColor: [
-           'rgba(255, 99, 132, 1)',
-           'rgba(54, 162, 235, 1)',
-           'rgba(255, 206, 86, 1)',
-           'rgba(75, 192, 192, 1)',
-           'rgba(153, 102, 255, 1)',
-           'rgba(255, 159, 64, 1)',
-          ],
-          borderWidth: 1,
-          }
-        ]
-      },
-            arr:[],
-        };
+      super(props);
+      this.state = {
+        show: false,
+        value: '',
+        keywords: ['mask', 'covid', 'pandemic', 'lockdown'],
+        areas: ['all', 'victoria', 'new south wales', 'queensland', 'tasmania', 
+        'western australia', 'northern territories', 'south australia'],
+      };
+      this.showChart = this.showChart.bind(this);
     }
     
     getValueKeyword=(event)=>{
-        //获取被选中的值
-        console.log('keyword: ' + event.target.value);
-        this.setState({
-          //默认值改变
-          selectKeyword:event.target.value
-        })
+      //获取被选中的值
+      console.log('keyword: ' + event.target.value);
+      this.setState({
+        //默认值改变
+        selectKeyword:event.target.value
+      })
     }
 
     getValueArea=(event)=>{
-        //获取被选中的值
-        console.log('Area: ' + event.target.value);
-        this.setState({
-          //默认值改变
-          selectArea:event.target.value
-        })
+      //获取被选中的值
+      console.log('Area: ' + event.target.value);
+      this.setState({
+        //默认值改变
+        selectArea:event.target.value
+      })
     }
 
-    getData(){
-    fetch('./testdata.json',{
-      method:'GET',
-      headers : {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-       },
-      mode:'cors',
-      cache:'default'
-    })
-     .then(res =>res.json())
-     .then((data) => {
-       console.log('fetch data received')
-       this.setState({
-         data:data
-       },function(){
-        console.log('start setting states')
-         this.state.data.forEach(element => {
-           this.state.chartData.labels.push(element.name)
-           this.state.chartData.datasets[0].data.push(element.total)
-           this.setState({
-             loading:false
-           })
-         });
-       })
-     })
+    showChart(){
+      this.setState({
+        show: true,
+      });
     }
 
     render() {
-        return (
+      return (
         <>
         <div style={{
             display: 'flex',
@@ -117,13 +67,15 @@ class PiePage extends React.Component{
             })
           }
           </select>
-          <button onClick={this.getData()}>click to submit</button>
+          <button onClick={this.showChart}>click to submit</button>
         </div>
-        <div>
-            <Pie data={this.state.data}/>
-        </div>
+        {
+          this.state.show?(
+            <div> <PieChart area={this.state.selectArea} keyword={this.state.selectKeyword}/> </div>
+          ):null
+        }
         </>
-        );
+      );
     }
 }
 
