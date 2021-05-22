@@ -35,6 +35,10 @@ class PiePage extends React.Component {
     showChart() {
         this.setState({
             show: true,
+            params:{
+                keyword: this.state.selectKeyword,
+                area: this.state.selectArea
+            }
         });
     }
 
