@@ -1,5 +1,8 @@
 import React from "react";
 import PieChart from "../charts/Pie";
+import {Button, SelectPicker} from 'rsuite';
+import 'rsuite/dist/styles/rsuite-default.css';
+import {areas, keywords} from '../lib/Selections'
 
 class PiePage extends React.Component {
     constructor(props) {
@@ -9,44 +12,48 @@ class PiePage extends React.Component {
             value: '',
             keywords: ['---', 'mask', 'covid', 'pandemic', 'lockdown'],
             areas: ['---', 'all', 'victoria', 'new south wales', 'queensland', 'tasmania',
-            'western australia', 'northern territories', 'south australia'],
+                'western australia', 'northern territories', 'south australia'],
         };
         this.showChart = this.showChart.bind(this);
     }
 
-    getValueKeyword = (event) => {
+
+    getValueKeyword = (item) => {
         //获取被选中的值
-        console.log('keyword: ' + event.target.value);
+        console.log('keyword: ' + item.value);
         this.setState({
             //默认值改变
-            selectKeyword: event.target.value
+            selectKeyword: item.value
         })
     }
 
-    getValueArea = (event) => {
+    getValueArea = (item) => {
         //获取被选中的值
-        console.log('Area: ' + event.target.value);
+        console.log('Area: ' + item.value);
         this.setState({
             //默认值改变
-            selectArea: event.target.value
+            selectArea: item.value
         })
     }
 
     showChart() {
         this.setState({
             show: true,
-            params:{
+            params: {
                 keyword: this.state.selectKeyword,
                 area: this.state.selectArea
             }
         });
     }
 
+
     render() {
+
+
         return (
             <>
                 <div style={{
-                    padding: '50px',
+                    padding: '30px',
                     margin: 'auto',
                 }}>
                     <div style={{
@@ -56,29 +63,12 @@ class PiePage extends React.Component {
                         justifyContent: 'center',
                         margin: 'auto',
                     }}>
-                        keyword: <select style={{
-                        marginRight: '10%',
-                    }} value={this.state.selectKeyword} onChange={(e) => this.getValueKeyword(e)}>
-                        {
-                            this.state.keywords.map((ele, index) => {
-                                return (
-                                    <option key={index}>{ele}</option>
-                                )
-                            })
-                        }
-                    </select>
-                        area: <select style={{
-                        marginRight: '10%',
-                    }} value={this.state.selectArea} onChange={(e) => this.getValueArea(e)}>
-                        {
-                            this.state.areas.map((ele, index) => {
-                                return (
-                                    <option key={index}>{ele}</option>
-                                )
-                            })
-                        }
-                    </select>
-                        <button onClick={this.showChart}>click to submit</button>
+                        <SelectPicker data={areas} style={{width: 224}} onSelect={(v, i, e) => this.getValueArea(i)}/>
+                        <SelectPicker data={keywords} style={{width: 224, marginLeft: '5%'}}
+                                      onSelect={(v, i, e) => this.getValueKeyword(i)}/>
+                        <Button appearance="primary" color="cyan" style={{width: 150, marginLeft: '5%'}}
+                                onClick={this.showChart}
+                                onChange={(e) => this.getValueKeyword(e)}> show result </Button>
 
                     </div>
                     {
@@ -88,7 +78,7 @@ class PiePage extends React.Component {
                                 height: '50%',
                                 width: '50%',
                                 margin: 'auto',
-                                top: '20px',
+                                paddingTop: '40px',
                             }}>
                                 <div>
                                     <PieChart param={this.state.params}/>

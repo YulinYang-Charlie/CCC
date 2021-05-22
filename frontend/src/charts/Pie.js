@@ -86,10 +86,11 @@ class PieChart extends React.Component{
       <>
       <div className='header'>
         <h1 className='title'>
-          Tweet counts
+
           <h1 style={{
-            fontSize: '135%'
-          }}>
+            fontSize: '100%',
+              margin: 'auto'
+          }}>Tweet counts
           {area?(" in " + area):null} 
           {keyword?(" about " + keyword):null} 
           </h1>
