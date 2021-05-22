@@ -3,7 +3,7 @@ import { Map, GoogleApiWrapper } from 'google-maps-react';
 
 const mapStyles = {
   width: '100%',
-  height: '100%',
+  height: '80%',
 };
 
 export class MapContainer extends React.Component {
@@ -42,9 +42,6 @@ export class MapContainer extends React.Component {
     return (
       <div style={{
         display:'flex',
-        alignContent:'center',
-        justifyContent:'center',
-        left: '100px'
       }}>
       <Map
         google={this.props.google}

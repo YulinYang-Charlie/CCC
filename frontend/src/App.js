@@ -6,12 +6,14 @@ import VerticalBar from "./charts/VerticalBar";
 import GroupedBar from "./charts/GroupedBar";
 import Line from "./charts/Line";
 import Doughnut from "./charts/Doughnut";
-import Pie from "./charts/Pie";
 import Radar from "./charts/Radar";
 import MultiType from "./charts/MultiType";
 import ClickEvents from "./charts/ClickEvents";
 import GoogleApiWrapper from "./charts/Map";
 import Dashboard from "./pages/Dashboard";
+import PiePage from "./pages/PiePage";
+
+import 'effect-dropdown-react/dist/index.css'
 
 function App() {
   return (
@@ -23,7 +25,7 @@ function App() {
         <Route exact path='/grouped-bar' component={GroupedBar} />
         <Route exact path='/line' component={Line} />
         <Route exact path='/doughnut' component={Doughnut} />
-        <Route exact path='/pie' component={Pie} />
+        <Route exact path='/pie' component={PiePage} />
         <Route exact path='/radar' component={Radar} />
         <Route exact path='/multi' component={MultiType} />
         <Route exact path='/click-events' component={ClickEvents} />
