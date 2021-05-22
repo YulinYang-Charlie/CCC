@@ -1,26 +1,40 @@
-import React from "react";
-
 export const keywords = [
     {
         "label": "Mask",
-        "value": "Mask",
+        "value": "mask",
         "role": "Master"
     },
     {
         "label": "Covid",
-        "value": "Covid",
+        "value": "covid",
         "role": "Master"
     },
     {
-        "label": "Pandemic",
-        "value": "Pandemic",
+        "label": "Migration",
+        "value": "migration",
         "role": "Master"
     },
     {
         "label": "Lockdown",
-        "value": "Lockdown",
+        "value": "lockdown",
         "role": "Master"
-    }]
+    },
+    {
+        "label": "Quarantine",
+        "value": "quarantine",
+        "role": "Master"
+    },
+    {
+        "label": "International",
+        "value": "international",
+        "role": "Master"
+    },
+    {
+        "label": "Vaccine",
+        "value": "vaccine",
+        "role": "Master"
+    },
+    ]
 
 export const areas = [
     {
