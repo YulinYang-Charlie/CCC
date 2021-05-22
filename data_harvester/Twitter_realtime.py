@@ -1,36 +1,14 @@
-
 import tweepy
-import pandas as pd
 import couchdb
 import argparse
 import json
-
+# import threading
 from tweepy.streaming import StreamListener
 import time
 
-# from nltk.sentiment.vader import SentimentIntensityAnalyzer
-# import nltk
-# nltk.download('vader_lexicon')
-# from textblob import TextBlob
-
-
-# apis = [{'consumer_key' : 'ZYS7ukLD70hVtrFQd8AOnu56M',
-# 'consumer_secret' : 'xpDdcHBDx1byBia1S1nkWg3ZiEme8AMahhxUJGqAaO6XtjcQ3l',
-# 'access_token' : '1124875820558716928-R1WKqtPqXQNHID5y2HN9jaIJrvZ8oL',
-# 'access_token_secret': 'kWfBcsUmxcwdiDWo02XrIn8xTMrJJ9RW3AQOUUdrRIAgM'},
-# {'consumer_key' : 'ZDNVVDoTHHYJaP0hX7nvxPVks',
-# 'consumer_secret' : 'hqeWeBShuREkrDLFSqLqj4gS66lAP2kJwkbfUtYpD6yAI9J8PN',
-# 'access_token' : '1223874444084408321-s3tRa4b1wCCIboaJ54JJtxSZYWee6Q',
-# 'access_token_secret' : 'o7Zk9G9Oz4kbwtb9zYY8BUw2AkHGdIBsQYBTHcjCA5UZJ'}]
-
-# boundary = "140.961681984, -39.159189527500004, 149.976679008, -33.9806475865" # Victoria
-# boundary = "96.81676569599999, -43.740509603, 159.109219008, -9.142175977" # Australia
 boundary = [96.81676569599999, -43.740509603, 159.109219008, -9.142175977] # Australia
 # boundary = [140.961681984, -39.159189527500004, 149.976679008, -33.9806475865] # Victoria
 # id_lst = []
-
-
-
 
 class Twitter_Stream(StreamListener):
     def __init__(self, db):
@@ -45,12 +23,9 @@ class Twitter_Stream(StreamListener):
         # id_lst.append(data['user']['id'])
         self.db.save(dataprocess(data))
 
-
     def on_error(self, status_code):
         if status_code == 420:
             return False
-
-
 
 def get_args():
     """ Obtaining args from terminal """
@@ -94,7 +69,6 @@ def dataprocess(data):
         month = "12"
         
     ans["created_at"] = date[-1]+month+date[2]+date[3][:2]
-    # print(ans["created_at"])
     ans["text"] = data["text"]
     ans["user_id"] = data["user"]["id"]
     ans["username"] = data["user"]["screen_name"]
@@ -106,31 +80,11 @@ def dataprocess(data):
     else:
         ans["place"] = data["place"]
 
-
-    # analysis = TextBlob(tweet)
-    # score = SentimentIntensityAnalyzer().polarity_scores(data["text"])
-    # neg = score['neg']
-    # neu = score['neu']
-    # pos = score['pos']
-
-    # if neg > pos:
-    #     sentiment = "negative"
-    # elif pos > neg:
-    #     sentiment = "positive"
-
-    # elif pos == neg:
-    #     sentiment = "neutral"
-
-    # ans["sentiment"] = sentiment
-
     for i in ans.keys():
         if ans[i] == "null":
             ans[i] = ""
 
-
-
     return ans
-
 
 # def tweet_user_timeline(apis, db):
 #     i = 0
@@ -179,12 +133,10 @@ def main():
         db = couch.create(args.db)
     except couchdb.http.PreconditionFailed:
         db = couch[args.db]
-    
-    # t1 = threading.Thread(target=tweet_realtime, args=(apis[0], db, boundary))
-    # t2 = threading.Thread(target=tweet_user_timeline, args=(apis[1:], db))
 
+    # t1 = threading.Thread(target=tweet_user_timeline, args=(apis[1:], db))
     # t1.start()
-    # t2.start()
+
     while True:
         try:
             stream = tweepy.Stream(auth=streamauth, listener=Twitter_Stream(db))
