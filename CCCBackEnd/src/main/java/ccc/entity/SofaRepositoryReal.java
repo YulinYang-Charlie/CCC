@@ -75,25 +75,25 @@ public class SofaRepositoryReal extends CouchDbRepositorySupport<Sofa> {
         createdAtDate = createdAtDate.substring(4,8);
         lastDate = lastDate.substring(4,8);
         for(int i = 23;i>=0;i--){
-            if(todayTime>=0){
-                int key = todayTime--;
+//            if(todayTime>=0){
+//                int key = todayTime--;
+//
+//                if(key<10){
+//                    finalMap.put(createdAtDate+"-0"+key,resMap.get(""+i));
+//                }else{
+//                    finalMap.put(createdAtDate+"-"+key,resMap.get(""+i));
+//                }
+//
+//            }else{
+//                int key = i+hour+1;
 
-                if(key<10){
-                    finalMap.put(createdAtDate+"-0"+key,resMap.get(""+i));
+
+                if(i<10){
+                    finalMap.put(lastDate+"-0"+i,resMap.get(""+i));
                 }else{
-                    finalMap.put(createdAtDate+"-"+key,resMap.get(""+i));
+                    finalMap.put(lastDate+"-"+i,resMap.get(""+i));
                 }
-
-            }else{
-                int key = i+hour+1;
-
-
-                if(key<10){
-                    finalMap.put(lastDate+"-0"+key,resMap.get(""+i));
-                }else{
-                    finalMap.put(lastDate+"-"+key,resMap.get(""+i));
-                }
-            }
+            //}
 
         }
         return finalMap;
