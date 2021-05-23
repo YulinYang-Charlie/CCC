@@ -133,10 +133,11 @@ def main():
     except couchdb.http.PreconditionFailed:
         db = couch[args.db]
 
-    if args.loc not in location.keys():
-        print("-l error")
-        print("The locations of tweets are (Victoria, New south wales, Queensland, Tasmania, South australia, Western australia, Northern territory)")
-        return
+    # if args.loc not in location.keys():
+    #     print("-l error")
+    #     print("The locations of tweets are (Victoria, New south wales, Queensland, Tasmania, South australia, Western australia, Northern territory)")
+    #     return
+    
     for i in location.keys():
         for keyword in ['covid','lockdown','mask','migration','international','vaccine','quarantine']:
             tweet_search(db, apis, keyword, args.num_tweets, i)
