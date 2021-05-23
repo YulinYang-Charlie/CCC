@@ -47,6 +47,8 @@ public class SofaRepositoryReal extends CouchDbRepositorySupport<Sofa> {
         int day = cal.get(Calendar.DATE);
         cal.set(Calendar.DATE, day-2);
         String lastDay = sdf.format(cal.getTime());
+        cal.set(Calendar.DATE, day-1);
+        String lastDate = sdf.format(cal.getTime());
 
         Map<String,Integer> resMap = new LinkedHashMap<>();
         String keyName = "";
@@ -70,13 +72,27 @@ public class SofaRepositoryReal extends CouchDbRepositorySupport<Sofa> {
         }
         Map<String,Integer> finalMap = new LinkedHashMap<>();
         int todayTime = hour;
+        createdAtDate = createdAtDate.substring(4,8);
+        lastDate = lastDate.substring(4,8);
         for(int i = 23;i>=0;i--){
             if(todayTime>=0){
                 int key = todayTime--;
-                finalMap.put(""+key,resMap.get(""+i));
+
+                if(key<10){
+                    finalMap.put(createdAtDate+"-0"+key,resMap.get(""+i));
+                }else{
+                    finalMap.put(createdAtDate+"-"+key,resMap.get(""+i));
+                }
+
             }else{
                 int key = i+hour+1;
-                finalMap.put(""+key,resMap.get(""+i));
+
+
+                if(key<10){
+                    finalMap.put(lastDate+"-0"+key,resMap.get(""+i));
+                }else{
+                    finalMap.put(lastDate+"-"+key,resMap.get(""+i));
+                }
             }
 
         }
