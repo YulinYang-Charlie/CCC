@@ -253,27 +253,30 @@ public class ChartsServiceImpl implements ChartsService {
                 curRes.put("name",specificLocation);
                 resultMap.put(specificLocation,curRes);
                 dateMap.put(curDate,resultMap);
-                return dateMap;
-
-            }
-            for(String location:locations){
-                Map<String,Object> curRes = new HashMap<>();
-                Map<String,Integer> curMap = resMap.get(location);
-                int posiNum = curMap.getOrDefault("positive",0);
-                int negNum = curMap.getOrDefault("negative",0);
-                int neuNum = curMap.getOrDefault("neutral",0);
-                int total  = posiNum+negNum+neuNum;
-                List<Integer> sentiList = new LinkedList<>();
-                sentiList.add(posiNum);
-                sentiList.add(neuNum);
-                sentiList.add(negNum);
-                curRes.put("total",total);
-                curRes.put("emotion",sentiList);
-                curRes.put("percentage",(double)total/totalTweets);
-                curRes.put("name",location);
-                resultMap.put(location,curRes);
 
 
+            }else {
+
+
+                for (String location : locations) {
+                    Map<String, Object> curRes = new HashMap<>();
+                    Map<String, Integer> curMap = resMap.get(location);
+                    int posiNum = curMap.getOrDefault("positive", 0);
+                    int negNum = curMap.getOrDefault("negative", 0);
+                    int neuNum = curMap.getOrDefault("neutral", 0);
+                    int total = posiNum + negNum + neuNum;
+                    List<Integer> sentiList = new LinkedList<>();
+                    sentiList.add(posiNum);
+                    sentiList.add(neuNum);
+                    sentiList.add(negNum);
+                    curRes.put("total", total);
+                    curRes.put("emotion", sentiList);
+                    curRes.put("percentage", (double) total / totalTweets);
+                    curRes.put("name", location);
+                    resultMap.put(location, curRes);
+
+
+                }
             }
             dateMap.put(curDate,resultMap);
 
