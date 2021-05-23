@@ -1,19 +1,9 @@
 {
-    "Western australia": {
-      "emotions": [
-        0,
-        0,
-        0
-      ],
-      "percentage": "0.2351",
-      "name": "Western australia",
-      "count": 123
-    },
     "New south wales": {
       "emotions": [
-        0,
-        0,
-        0
+        3454,
+        2342,
+        2222
       ],
       "percentage": "0.2351",
       "name": "New south wales",
@@ -21,52 +11,42 @@
     },
     "Victoria": {
       "emotions": [
-        0,
-        0,
-        0
+        4323,
+        7727,
+        4545
       ],
       "percentage": "0.2351",
       "name": "Victoria",
-      "count": 123
+      "count": 33
     },
     "Tasmania": {
       "emotions": [
-        0,
-        0,
-        0
+        1616,
+        4545,
+        3333
       ],
       "percentage": "0.2351",
       "name": "Tasmania",
-      "count": 111
+      "count": 65
     },
     "South australia": {
       "emotions": [
-        0,
-        0,
-        0
+        1111,
+        6666,
+        4444
       ],
       "percentage": "0.2351",
       "name": "South australia",
-      "count": 123
-    },
-    "Northern territory": {
-      "emotions": [
-        0,
-        0,
-        0
-      ],
-      "percentage": "0.2351",
-      "name": "Northern territory",
-      "count": 0
+      "count": 453
     },
     "Queensland": {
       "emotions": [
-        0,
-        0,
-        0
+        3333,
+        7777,
+        5656
       ],
       "percentage": "0.2351",
       "name": "Queensland",
-      "count": 123
+      "count": 77
     }
   }

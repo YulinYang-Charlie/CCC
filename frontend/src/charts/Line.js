@@ -1,5 +1,5 @@
 import React from 'react';
-import { Line } from 'react-chartjs-2';
+import {Line} from 'react-chartjs-2';
 
 const options = {
   scales: {
@@ -14,10 +14,10 @@ const options = {
 };
 
 const tmpdata = {
-  labels: ['1','2','3','4','5','6'],
+  labels: ['1', '2', '3', '4', '5', '6'],
   datasets: [
     {
-      label: '# of Votes',
+      label: 'number of Tweets',
       data: [12, 19, 3, 5, 2, 3],
       fill: false,
       backgroundColor: 'rgb(255, 99, 132)',
@@ -28,16 +28,16 @@ const tmpdata = {
 
 class LineChart extends React.Component {
 
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state={
+    this.state = {
       data: {},
       refresh: '0',
       timedata: {
         labels: [],
         datasets: [
           {
-            label: '# of Tweets',
+            label: 'number of Tweets',
             data: [],
             fill: false,
             backgroundColor: 'rgb(255,99,132)',
@@ -69,36 +69,44 @@ class LineChart extends React.Component {
       mode: "cors",
       cache: "default",
     })
-    .then((res) => res.json())
-    .then((data) => {
-      this.setState({
-        data: data
-      }, function(){
-        tmpdata.labels = [];
-        tmpdata.datasets[0].data = [];
-        for (const time in this.state.data) {
-          tmpdata.labels.push(time);
-          tmpdata.datasets[0].data.push(data[time]);
-        }
-    })})
-    .then(() => {
-      tmpdata.labels.reverse();
-      tmpdata.datasets[0].data.reverse();
-      this.setState({
-        timedata: tmpdata,
-        refresh: '1'
+      .then((res) => res.json())
+      .then((data) => {
+        this.setState({
+          data: data
+        }, function () {
+          tmpdata.labels = [];
+          tmpdata.datasets[0].data = [];
+          for (const time in this.state.data) {
+            tmpdata.labels.push(time);
+            tmpdata.datasets[0].data.push(data[time]);
+          }
+        })
       })
-    })
+      .then(() => {
+        tmpdata.labels.reverse();
+        tmpdata.datasets[0].data.reverse();
+        this.setState({
+          timedata: tmpdata,
+          refresh: '1'
+        })
+      })
   }
 
-  render(){
+  render() {
     console.log(this.state.timedata)
-    return(
+    return (
       <>
         <div className='header'>
-          <h1 className='title'>Tweet numbers in past 24 hours</h1>
+          <h1 className='title'>Tweet counts in past 24 hours</h1>
         </div>
-        <Line data={this.state.timedata} options={options} />
+        <div style={{
+          paddingLeft: '60pt',
+          paddingRight: '60pt',
+          paddingTop: '10pt',
+          paddingBottom:'80pt'
+        }}>
+          <Line data={this.state.timedata} options={options}/>
+        </div>
       </>
     )
   }

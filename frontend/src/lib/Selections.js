@@ -63,16 +63,6 @@ export const areas = [
         "role": "Master"
     },
     {
-        "label": "Western Australia",
-        "value": "Western Australia",
-        "role": "Master"
-    },
-    {
-        "label": "Northern Territories",
-        "value": "Northern Territories",
-        "role": "Master"
-    },
-    {
         "label": "South Australia",
         "value": "South Australia",
         "role": "Master"
