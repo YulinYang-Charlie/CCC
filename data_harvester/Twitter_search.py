@@ -16,12 +16,12 @@ def get_args():
     parser = argparse.ArgumentParser(description="Processing tweets")
     parser.add_argument("-db", "--db", type = str, required = True, 
                         help = "The Name of Database to store")
-    parser.add_argument("-q", "--query", type = str, required = False, 
-                        help = "The keywords for twitter searching")
+    # parser.add_argument("-q", "--query", type = str, required = False, 
+    #                     help = "The keywords for twitter searching")
     parser.add_argument("-n", "--num_tweets", type=int, required = True,
                         help = "The number of tweets to be pulled")
-    parser.add_argument("-l", "--loc", type=str, required = True,
-                        help = "The location of tweets (Victoria, New south wales, Queensland, Tasmania, South australia, Western australia, Northern territory)")
+    # parser.add_argument("-l", "--loc", type=str, required = True,
+    #                     help = "The location of tweets (Victoria, New south wales, Queensland, Tasmania, South australia, Western australia, Northern territory)")
 
     args = parser.parse_args()
     
@@ -137,8 +137,9 @@ def main():
         print("-l error")
         print("The locations of tweets are (Victoria, New south wales, Queensland, Tasmania, South australia, Western australia, Northern territory)")
         return
-    
-    tweet_search(db, apis, args.query, args.num_tweets, args.loc)
+    for i in location.keys():
+        for keyword in ['covid','lockdown','mask','migration','international','vaccine','quarantine']:
+            tweet_search(db, apis, keyword, args.num_tweets, i)
 
 if __name__ == "__main__":
     main()
