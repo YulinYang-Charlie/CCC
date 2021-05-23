@@ -276,11 +276,10 @@ public class ChartsServiceImpl implements ChartsService {
 
             }
             dateMap.put(curDate,resultMap);
-            return dateMap;
-
-
 
         }
+
+        return dateMap;
 //        for(String location:locations){
 //            Map<String,Object> curRes = new HashMap<>();
 //            Map<String,Integer> curMap = resMap.get(location);
@@ -299,7 +298,7 @@ public class ChartsServiceImpl implements ChartsService {
 //            resultMap.put(location,curRes);
 //        }
 
-        return dateMap;
+        //return dateMap;
     }
 
     @Override
