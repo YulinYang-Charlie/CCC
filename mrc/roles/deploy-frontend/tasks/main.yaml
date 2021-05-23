@@ -1,0 +1,14 @@
+- name: git clone all code
+  shell: git clone http://github.com/YulinYang-Charlie/CCC.git
+
+- name: Shut down previous server
+  become:
+    yes
+  shell: docker-compose down --rmi local
+  args:
+    chdir: CCC/frontend
+
+- name: Start server
+  shell: docker-compose up -d --build
+  args:
+    chdir: CCC/frontend
