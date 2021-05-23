@@ -18,8 +18,6 @@ COPY package.json package.json
 
 COPY yarn.lock yarn.lock
 
-COPY ".env.local" ".env.local"
-
 RUN yarn
 
 CMD ["yarn", "start"]
