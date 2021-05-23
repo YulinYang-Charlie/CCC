@@ -7,8 +7,8 @@ from nltk.sentiment.vader import SentimentIntensityAnalyzer
 
 location = {"Victoria" : "-37.8390435045,145.106023031,300km", "New south wales": "-33.038583,146.4857016,500km",
          "Queensland": "-24.5840214,144.9539619,900km", "Tasmania" : "-42.2648831,146.6542134,300km",
-         "South australia": "-30.5776848,135.2307377,700km", "Western australia": "-25.042261, 117.793221,1200km",
-         "Northern territory":"-19.491411, 132.550964,900km"}
+         "South australia": "-30.5776848,135.2307377,700km", "Western australia": "-25.042261, 117.793221,1300km",
+         "Northern territory":"-19.491411, 132.550964,1000km"}
 
 
 def get_args():
