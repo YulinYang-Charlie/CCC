@@ -3,6 +3,7 @@ import Sidebar from './Sidebar/Sidebar';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Team from './pages/Team';
 import GroupedBar from "./charts/GroupedBar";
+import VerticalBar from "./charts/VerticalBar";
 import Line from "./charts/Line";
 import Radar from "./charts/Radar";
 import MultiType from "./charts/MultiType";
@@ -12,6 +13,7 @@ import Dashboard from "./pages/Dashboard";
 import PiePage from "./pages/PiePage";
 import EmotionBar from "./charts/EmotionBar";
 import SingleAxis from "./charts/SingleAxis"
+import GroupedBarPage from './pages/GroupedBarPage';
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
       <Sidebar />
       <Switch>
         <Route exact path='/dashboard' component={Dashboard} />
+        <Route exact path='/vertical-bar' component={VerticalBar} />
+        <Route exact path='/grouped-bar' component={GroupedBarPage} />
         <Route exact path='/line' component={Line} />
         <Route exact path='/grouped-bar' component={GroupedBar} />
         <Route exact path='/single-axis' component={SingleAxis} />
