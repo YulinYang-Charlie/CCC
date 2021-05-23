@@ -116,11 +116,12 @@ public class ChartsServiceImpl implements ChartsService {
     }
 
     @Override
-    public Map<String,Map<String,Object>> getTweetsByKeyword(String keyword) {
+    public Map<String,Map<String,Object>> getTweetsByKeyword(String keyword,String specificLocation) {
         //List<Map<String,Integer>>  list = new ArrayList<>();
         Map<String,Map<String,Integer>> curMap = sofaRepository.findByKeywordAndLocation(keyword);
         int totalTweets = 0;
         Map<String,Map<String,Object>> resMap = new HashMap<>();
+
         for(String location:locations){
             Map<String,Object> map = new HashMap<>();
            // Get <Region,<Sentiment,Count>>
@@ -147,10 +148,19 @@ public class ChartsServiceImpl implements ChartsService {
             totalTweets +=(posiNum+negNum+neuNum);
             resMap.put(location,map);
         }
+        Map<String,Integer> locationTweetsMap = sofaRepository.findByLocation();
+
         for(String location:locations){
             Map<String,Object> map = resMap.get(location);
-            map.put("percentage",Double.valueOf((int)map.get("count")/(double)totalTweets));
+            int curTotal = locationTweetsMap.get(location);
+            map.put("percentage",curTotal!=0?Double.valueOf((int)map.get("count")/(double)curTotal):0);
             resMap.put(location,map);
+        }
+        if(specificLocation!=null&&specificLocation.length()!=0&&!specificLocation.equals("")){
+            Map<String,Object> cur = resMap.get(specificLocation);
+            Map<String,Map<String,Object>> specificMap = new HashMap<>();
+            specificMap.put(specificLocation,cur);
+            return specificMap;
         }
 
         return resMap;
@@ -200,7 +210,7 @@ public class ChartsServiceImpl implements ChartsService {
 
 
     @Override
-    public Map<String,Map<String,Map<String,Object>>> getTweetsByDatesAndKeyword(String keyword, String startDate, String endDate) {
+    public Map<String,Map<String,Map<String,Object>>> getTweetsByDatesAndKeyword(String keyword, String startDate, String endDate,String specificLocation) {
         Map<String,Map<String,Object>> resultMap = new HashMap<>();
         Map<String,Map<String,Map<String,Object>>> dateMap = new HashMap<>();
         Map<String,List<ArrayList>> map = sofaRepository.getTweetsCountByDatesAndKeywrod(keyword,startDate,endDate);
@@ -225,6 +235,27 @@ public class ChartsServiceImpl implements ChartsService {
                 resMap.put(location,curMap);
 
             }
+
+            if(specificLocation!=null&&!specificLocation.equals("")){
+                Map<String,Object> curRes = new HashMap<>();
+                Map<String,Integer> curMap = resMap.get(specificLocation);
+                int posiNum = curMap.getOrDefault("positive",0);
+                int negNum = curMap.getOrDefault("negative",0);
+                int neuNum = curMap.getOrDefault("neutral",0);
+                int total  = posiNum+negNum+neuNum;
+                List<Integer> sentiList = new LinkedList<>();
+                sentiList.add(posiNum);
+                sentiList.add(neuNum);
+                sentiList.add(negNum);
+                curRes.put("total",total);
+                curRes.put("emotion",sentiList);
+                curRes.put("percentage",(double)total/totalTweets);
+                curRes.put("name",specificLocation);
+                resultMap.put(specificLocation,curRes);
+                dateMap.put(curDate,resultMap);
+                return dateMap;
+
+            }
             for(String location:locations){
                 Map<String,Object> curRes = new HashMap<>();
                 Map<String,Integer> curMap = resMap.get(location);
@@ -242,9 +273,10 @@ public class ChartsServiceImpl implements ChartsService {
                 curRes.put("name",location);
                 resultMap.put(location,curRes);
 
+
             }
             dateMap.put(curDate,resultMap);
-
+            return dateMap;
 
 
 

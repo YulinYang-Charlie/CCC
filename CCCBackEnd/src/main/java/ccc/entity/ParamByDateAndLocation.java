@@ -11,6 +11,8 @@ public class ParamByDateAndLocation {
     @ApiModelProperty(name = "keyword")
     private String keyword;
 
+    @ApiModelProperty(name = "location")
+    private String location;
 
 
     public String getDate() {
@@ -28,5 +30,13 @@ public class ParamByDateAndLocation {
 
     public void setKeyword(String keyword) {
         this.keyword = keyword;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 }

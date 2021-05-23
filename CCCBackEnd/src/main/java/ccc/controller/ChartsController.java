@@ -54,7 +54,8 @@ public class ChartsController {
     @RequestMapping(value = "/getTweetsByKeyword", method = RequestMethod.POST)
     public Map<String,Map<String,Object>> getTweetCountByKeyword(@RequestBody ParamByKeyword param){
         String keyword  = param.getKeyword();
-        return chartsService.getTweetsByKeyword(keyword);
+        String location = param.getLocation();
+        return chartsService.getTweetsByKeyword(keyword,location);
     }
 
     /**
@@ -75,6 +76,7 @@ public class ChartsController {
         String keyword = param.getKeyword();
         String startDate = param.getStartDate();
         String endDate  = param.getEndDate();
+        String location = param.getLocation();
         if(keyword.length()==0||startDate.length()==0||endDate.length()==0){
             System.out.println("parameter wrong");
             Map<String,Map<String,Map<String,Object>>> map = new HashMap<>();
@@ -83,7 +85,7 @@ public class ChartsController {
             map.put("Error",res);
             return map;
         }
-        return chartsService.getTweetsByDatesAndKeyword(keyword,startDate,endDate);
+        return chartsService.getTweetsByDatesAndKeyword(keyword,startDate,endDate,location);
 
     }
 

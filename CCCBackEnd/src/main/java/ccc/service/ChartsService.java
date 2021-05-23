@@ -24,11 +24,11 @@ public interface ChartsService {
      */
     public List<Region> getTwittersCountByLocation(String locationNameOrNull);
 
-    Map<String,Map<String,Object>> getTweetsByKeyword(String keyword);
+    Map<String,Map<String,Object>> getTweetsByKeyword(String keyword,String location);
 
     Map<String,Map<String,Object>> getTweetsCountByDateAndKeyword(String date, String keyword);
 
-    Map<String,Map<String,Map<String,Object>>> getTweetsByDatesAndKeyword(String keyword, String startDate, String endDate);
+    Map<String,Map<String,Map<String,Object>>> getTweetsByDatesAndKeyword(String keyword, String startDate, String endDate,String location);
 
     Map<String, Integer> getRealTimeTweetsCount();
 }
