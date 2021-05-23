@@ -1,32 +1,72 @@
-[
-    {
-    "name": "new south wales",
-    "total": 100,
-    "percentage": 0.6
+{
+    "Western australia": {
+      "emotions": [
+        0,
+        0,
+        0
+      ],
+      "percentage": "0.2351",
+      "name": "Western australia",
+      "count": 123
     },
-    {
-    "name": "queensland",
-    "total": 102,
-    "percentage": 0.1
+    "New south wales": {
+      "emotions": [
+        0,
+        0,
+        0
+      ],
+      "percentage": "0.2351",
+      "name": "New south wales",
+      "count": 123
     },
-    {
-    "name": "south australia",
-    "total": 134,
-    "percentage": 0.2
+    "Victoria": {
+      "emotions": [
+        0,
+        0,
+        0
+      ],
+      "percentage": "0.2351",
+      "name": "Victoria",
+      "count": 123
     },
-    {
-    "name": "western australia",
-    "total": 109,
-    "percentage": 0.4
+    "Tasmania": {
+      "emotions": [
+        0,
+        0,
+        0
+      ],
+      "percentage": "0.2351",
+      "name": "Tasmania",
+      "count": 111
     },
-    {
-    "name": "tasmania",
-    "total": 100,
-    "percentage": 0.6
+    "South australia": {
+      "emotions": [
+        0,
+        0,
+        0
+      ],
+      "percentage": "0.2351",
+      "name": "South australia",
+      "count": 123
     },
-    {
-    "name": "victoria",
-    "total": 100,
-    "percentage": 0.6
+    "Northern territory": {
+      "emotions": [
+        0,
+        0,
+        0
+      ],
+      "percentage": "0.2351",
+      "name": "Northern territory",
+      "count": 0
+    },
+    "Queensland": {
+      "emotions": [
+        0,
+        0,
+        0
+      ],
+      "percentage": "0.2351",
+      "name": "Queensland",
+      "count": 123
     }
-]
+  }

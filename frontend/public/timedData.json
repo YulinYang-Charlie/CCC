@@ -1,0 +1,218 @@
+{
+    "20210519": {
+      "Western australia": {
+        "total": 0,
+        "emotion": [
+          0,
+          0,
+          0
+        ],
+        "percentage": 0,
+        "name": "Western australia"
+      },
+      "New south wales": {
+        "total": 24332,
+        "emotion": [
+          7831,
+          7900,
+          8601
+        ],
+        "percentage": 0.4311050477489768,
+        "name": "New south wales"
+      },
+      "Victoria": {
+        "total": 19136,
+        "emotion": [
+          5050,
+          5575,
+          8511
+        ],
+        "percentage": 0.33904431175918215,
+        "name": "Victoria"
+      },
+      "Tasmania": {
+        "total": 1131,
+        "emotion": [
+          751,
+          104,
+          276
+        ],
+        "percentage": 0.020038624404245142,
+        "name": "Tasmania"
+      },
+      "South australia": {
+        "total": 2545,
+        "emotion": [
+          958,
+          812,
+          775
+        ],
+        "percentage": 0.04509133431370812,
+        "name": "South australia"
+      },
+      "Northern territory": {
+        "total": 0,
+        "emotion": [
+          0,
+          0,
+          0
+        ],
+        "percentage": 0,
+        "name": "Northern territory"
+      },
+      "Queensland": {
+        "total": 9297,
+        "emotion": [
+          3588,
+          2248,
+          3461
+        ],
+        "percentage": 0.16472068177388777,
+        "name": "Queensland"
+      }
+    },
+    "20210520": {
+      "Western australia": {
+        "total": 0,
+        "emotion": [
+          0,
+          0,
+          0
+        ],
+        "percentage": 0,
+        "name": "Western australia"
+      },
+      "New south wales": {
+        "total": 24332,
+        "emotion": [
+          7831,
+          7900,
+          8601
+        ],
+        "percentage": 0.4311050477489768,
+        "name": "New south wales"
+      },
+      "Victoria": {
+        "total": 19136,
+        "emotion": [
+          5050,
+          5575,
+          8511
+        ],
+        "percentage": 0.33904431175918215,
+        "name": "Victoria"
+      },
+      "Tasmania": {
+        "total": 1131,
+        "emotion": [
+          751,
+          104,
+          276
+        ],
+        "percentage": 0.020038624404245142,
+        "name": "Tasmania"
+      },
+      "South australia": {
+        "total": 2545,
+        "emotion": [
+          958,
+          812,
+          775
+        ],
+        "percentage": 0.04509133431370812,
+        "name": "South australia"
+      },
+      "Northern territory": {
+        "total": 0,
+        "emotion": [
+          0,
+          0,
+          0
+        ],
+        "percentage": 0,
+        "name": "Northern territory"
+      },
+      "Queensland": {
+        "total": 9297,
+        "emotion": [
+          3588,
+          2248,
+          3461
+        ],
+        "percentage": 0.16472068177388777,
+        "name": "Queensland"
+      }
+    },
+    "20210521": {
+      "Western australia": {
+        "total": 0,
+        "emotion": [
+          0,
+          0,
+          0
+        ],
+        "percentage": 0,
+        "name": "Western australia"
+      },
+      "New south wales": {
+        "total": 24332,
+        "emotion": [
+          7831,
+          7900,
+          8601
+        ],
+        "percentage": 0.4311050477489768,
+        "name": "New south wales"
+      },
+      "Victoria": {
+        "total": 19136,
+        "emotion": [
+          5050,
+          5575,
+          8511
+        ],
+        "percentage": 0.33904431175918215,
+        "name": "Victoria"
+      },
+      "Tasmania": {
+        "total": 1131,
+        "emotion": [
+          751,
+          104,
+          276
+        ],
+        "percentage": 0.020038624404245142,
+        "name": "Tasmania"
+      },
+      "South australia": {
+        "total": 2545,
+        "emotion": [
+          958,
+          812,
+          775
+        ],
+        "percentage": 0.04509133431370812,
+        "name": "South australia"
+      },
+      "Northern territory": {
+        "total": 0,
+        "emotion": [
+          0,
+          0,
+          0
+        ],
+        "percentage": 0,
+        "name": "Northern territory"
+      },
+      "Queensland": {
+        "total": 9297,
+        "emotion": [
+          3588,
+          2248,
+          3461
+        ],
+        "percentage": 0.16472068177388777,
+        "name": "Queensland"
+      }
+    }
+  }
