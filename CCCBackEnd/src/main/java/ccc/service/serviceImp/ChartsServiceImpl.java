@@ -211,7 +211,7 @@ public class ChartsServiceImpl implements ChartsService {
 
     @Override
     public Map<String,Map<String,Map<String,Object>>> getTweetsByDatesAndKeyword(String keyword, String startDate, String endDate,String specificLocation) {
-        Map<String,Map<String,Object>> resultMap = new HashMap<>();
+
         Map<String,Map<String,Map<String,Object>>> dateMap = new HashMap<>();
         Map<String,List<ArrayList>> map = sofaRepository.getTweetsCountByDatesAndKeywrod(keyword,startDate,endDate);
         Iterator it = map.entrySet().iterator();
@@ -221,18 +221,24 @@ public class ChartsServiceImpl implements ChartsService {
         }
         int totalTweets = 0;
         while(it.hasNext()){
+            Map<String,Map<String,Object>> resultMap = new HashMap<>();
+
             Map.Entry entry = (Map.Entry)it.next();
             String curDate = (String)entry.getKey();
             // get today list
             List<ArrayList> curList = (List<ArrayList>)entry.getValue();
-            totalTweets += curList.size();
+
 
             for (ArrayList list :curList){
                 String location  = (String)list.get(0);
                 Map<String,Integer> curMap = resMap.get(location);
                 String sentiment = (String)list.get(1);
-                curMap.put(sentiment,(curMap.getOrDefault(sentiment,0)+1));
-                resMap.put(location,curMap);
+                if(keyword.equals(list.get(2))){
+                    totalTweets += 1;
+                    curMap.put(sentiment,(curMap.getOrDefault(sentiment,0)+1));
+                    resMap.put(location,curMap);
+                }
+
 
             }
 
@@ -265,6 +271,7 @@ public class ChartsServiceImpl implements ChartsService {
                     int negNum = curMap.getOrDefault("negative", 0);
                     int neuNum = curMap.getOrDefault("neutral", 0);
                     int total = posiNum + negNum + neuNum;
+
                     List<Integer> sentiList = new LinkedList<>();
                     sentiList.add(posiNum);
                     sentiList.add(neuNum);

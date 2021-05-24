@@ -99,7 +99,7 @@ public class SofaRepository extends CouchDbRepositorySupport<Sofa> {
     }
 
 
-    @View(name  = "by_dates_keyword",map = "function(doc){emit(doc.created_at,[doc.location,doc.sentiment])}")
+    @View(name  = "by_dates_keyword",map = "function(doc){emit(doc.created_at,[doc.location,doc.sentiment,doc.keyword])}")
     public Map<String,List<ArrayList>> getTweetsCountByDatesAndKeywrod(String keyword,String startDate,String endDate){
 
         int left  = Integer.valueOf(startDate);
