@@ -1,6 +1,6 @@
 import './App.css';
 import Sidebar from './Sidebar/Sidebar';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import Team from './pages/Team';
 import GroupedBar from "./charts/GroupedBar";
 import VerticalBar from "./charts/VerticalBar";
@@ -20,6 +20,7 @@ function App() {
     <Router>
       <Sidebar />
       <Switch>
+        <Redirect path="/" exact={true} to="/dashboard" />
         <Route exact path='/dashboard' component={Dashboard} />
         <Route exact path='/vertical-bar' component={VerticalBar} />
         <Route exact path='/grouped-bar' component={GroupedBarPage} />
