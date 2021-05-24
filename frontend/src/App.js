@@ -2,7 +2,6 @@ import './App.css';
 import Sidebar from './Sidebar/Sidebar';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Team from './pages/Team';
-import VerticalBar from "./charts/VerticalBar";
 import GroupedBar from "./charts/GroupedBar";
 import Line from "./charts/Line";
 import Radar from "./charts/Radar";
@@ -12,6 +11,7 @@ import GoogleApiWrapper from "./charts/Map";
 import Dashboard from "./pages/Dashboard";
 import PiePage from "./pages/PiePage";
 import EmotionBar from "./charts/EmotionBar";
+import SingleAxis from "./charts/SingleAxis"
 
 function App() {
   return (
@@ -19,9 +19,9 @@ function App() {
       <Sidebar />
       <Switch>
         <Route exact path='/dashboard' component={Dashboard} />
-        <Route exact path='/vertical-bar' component={VerticalBar} />
-        <Route exact path='/grouped-bar' component={GroupedBar} />
         <Route exact path='/line' component={Line} />
+        <Route exact path='/grouped-bar' component={GroupedBar} />
+        <Route exact path='/single-axis' component={SingleAxis} />
         <Route exact path='/emotion-bar' component={EmotionBar} />
         <Route exact path='/pie' component={PiePage} />
         <Route exact path='/radar' component={Radar} />

@@ -34,8 +34,8 @@ export const SidebarData = [
         cName: 'sub-nav'
       },
       {
-        title: 'Vertical Bar',
-        path: '/vertical-bar',
+        title: 'Line',
+        path: '/line',
         icon: <BsIcons.BsFillBarChartFill />
       },
         {
@@ -44,8 +44,8 @@ export const SidebarData = [
         icon: <BsIcons.BsFillBarChartFill />
       },
         {
-        title: 'Line',
-        path: '/line',
+        title: 'SingleAxis',
+        path: '/single-axis',
         icon: <BsIcons.BsFillBarChartFill />
       },
         {

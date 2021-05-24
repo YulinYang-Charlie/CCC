@@ -161,7 +161,6 @@ export class EmotionBar extends React.Component {
   }
 
   render() {
-    const datas = this.state.chartData
     console.log('start rendering')
     // if (this.state.loading) return (
     //   <div>

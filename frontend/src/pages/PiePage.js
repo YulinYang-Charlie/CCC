@@ -152,8 +152,8 @@ class PiePage extends React.Component {
           {this.state.show ? (
             <div
               style={{
-                height: "50%",
-                width: "50%",
+                height: "40%",
+                width: "40%",
                 margin: "auto",
                 paddingTop: "40px",
               }}
