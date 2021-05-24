@@ -2,7 +2,7 @@ import React from "react";
 import PieChart from "../charts/Pie";
 import {Button, SelectPicker} from "rsuite";
 import "rsuite/dist/styles/rsuite-default.css";
-import {areas, keywords} from "../lib/Selections";
+import {keywords} from "../lib/Selections";
 
 let params = {};
 let chartData = {
