@@ -308,6 +308,11 @@ public class ChartsServiceImpl implements ChartsService {
     public Map<String, Integer> getRealTimeTweetsCount() {
         return sofaRepositoryReal.getRealTimeTweetsCount();
     }
+
+    @Override
+    public Map<String, Map<String, Integer>> getRealTimeByWeekdays() {
+        return sofaRepositoryReal.getRealTimeByWeekdays();
+    }
 }
 
 

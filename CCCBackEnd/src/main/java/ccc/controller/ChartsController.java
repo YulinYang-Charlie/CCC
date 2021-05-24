@@ -66,7 +66,6 @@ public class ChartsController {
     public Map<String,Map<String,Object>> getTweetsCountByDateAndKeyword(@RequestBody ParamByDateAndLocation param){
         String keyword = param.getKeyword();
         String date = param.getDate();
-
         return chartsService.getTweetsCountByDateAndKeyword(date,keyword);
     }
 
@@ -93,6 +92,13 @@ public class ChartsController {
     @RequestMapping(value = "/getRealTimeTweetsCount",method = RequestMethod.GET)
     public Map<String,Integer> getRealTimeTweetsCount(){
         return chartsService.getRealTimeTweetsCount();
+    }
+
+
+    @ApiOperation("Get tweets counts real time by week days")
+    @RequestMapping(value = "/getRealTimeTweetsCountByWeekdays",method = RequestMethod.GET)
+    public Map<String,Map<String,Integer>> getRealTimeByWeekdays(){
+        return chartsService.getRealTimeByWeekdays();
     }
 
 

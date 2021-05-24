@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -20,6 +21,9 @@ import java.util.*;
 @Component
 @DependsOn("CouchDbConnectorReal")
 public class SofaRepositoryReal extends CouchDbRepositorySupport<Sofa> {
+
+    private static final String[] weekDays = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+
     @Autowired
     public SofaRepositoryReal( @Qualifier("CouchDbConnectorReal") CouchDbConnector db) {
         super(Sofa.class, db);
@@ -117,5 +121,56 @@ public class SofaRepositoryReal extends CouchDbRepositorySupport<Sofa> {
 
 
 
+    }
+
+
+
+    @View(name = "by_week",map = "function(doc){emit(doc.created_at,1)}")
+    public Map<String, Map<String, Integer>> getRealTimeByWeekdays() {
+
+        ViewQuery query = new ViewQuery().designDocId("_design/Sofa").viewName("by_week");
+        Map<String,Map<String,Integer>> resMap = new HashMap<>();
+        List<ViewResult.Row> rows = db.queryView(query).getRows();
+
+        for(String day:weekDays){
+            Map<String,Integer> map = new HashMap<>();
+            for(int i = 0;i<=23;i++){
+                map.put(i<10?"0"+i:""+i,0);
+            }
+            resMap.put(day,map);
+        }
+        for(ViewResult.Row row:rows){
+            String key = row.getKey();
+            // 2021052015
+            String date = key.substring(0,8);
+            String time = key.substring(8,10);
+            String weekday = dateToWeek(date);
+            Map<String,Integer> curMap = resMap.get(weekday);
+            curMap.put(time,curMap.getOrDefault((time),0)+1);
+            resMap.put(weekday,curMap);
+
+        }
+
+        return resMap;
+
+
+    }
+
+    public static String dateToWeek(String dateStr) {
+        String year = dateStr.substring(0,4);
+        String month = dateStr.substring(4,6);
+        String day = dateStr.substring(6,8);
+        String datetime = year+"-"+month+"-"+day;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar cal = Calendar.getInstance();
+        Date date;
+        try {
+            date = sdf.parse(datetime);
+            cal.setTime(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        int w = cal.get(Calendar.DAY_OF_WEEK) - 1;
+        return weekDays[w];
     }
 }
