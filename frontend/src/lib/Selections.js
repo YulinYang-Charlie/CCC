@@ -44,7 +44,7 @@ export const areas = [
     },
     {
         "label": "Victoria",
-        "value": "victoria",
+        "value": "Victoria",
         "role": "Master"
     },
     {
