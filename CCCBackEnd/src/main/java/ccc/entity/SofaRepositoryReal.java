@@ -129,11 +129,11 @@ public class SofaRepositoryReal extends CouchDbRepositorySupport<Sofa> {
     public Map<String, Map<String, Integer>> getRealTimeByWeekdays() {
 
         ViewQuery query = new ViewQuery().designDocId("_design/Sofa").viewName("by_week");
-        Map<String,Map<String,Integer>> resMap = new HashMap<>();
+        Map<String,Map<String,Integer>> resMap = new LinkedHashMap<>();
         List<ViewResult.Row> rows = db.queryView(query).getRows();
 
         for(String day:weekDays){
-            Map<String,Integer> map = new HashMap<>();
+            Map<String,Integer> map = new LinkedHashMap<>();
             for(int i = 0;i<=23;i++){
                 map.put(i<10?"0"+i:""+i,0);
             }
