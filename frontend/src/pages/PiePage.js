@@ -27,29 +27,21 @@ class PiePage extends React.Component {
 
   getValueKeyword = (item) => {
     console.log("keyword: " + item.value);
-    this.setState({
-      params: {
-        keyword: item.value,
-        area: this.state.params.area,
-      },
-    });
+    params = {
+      keyword: item.value,
+      area: this.state.params.area,
+    };
   };
 
   getValueArea = (item) => {
     console.log("Area: " + item.value);
-    this.setState({
-      params: {
-        keyword: this.state.params.keyword,
-        area: item.value,
-      },
-    });
+    params = {
+      keyword: this.state.params.keyword,
+      area: item.value,
+    };
   };
 
   show() {
-    this.setState({
-      show: true,
-    });
-    params = this.state.params;
     fetch("http://172.26.133.151:8080/charts/getTweetsByKeyword", {
       method: "POST",
       headers: {
@@ -91,20 +83,14 @@ class PiePage extends React.Component {
             },
           ],
         };
-        this.setState(
-          {
-            data: data,
-          },
-          function () {
-            for (const region in this.state.data) {
-              chartData.labels.push(region);
-              chartData.datasets[0].data.push(this.state.data[region].count);
-            }
-          }
-        );
+        for (const region in data) {
+          chartData.labels.push(region);
+          chartData.datasets[0].data.push(data[region].count);
+        }
         this.setState({
           chartData: chartData,
-          update: !this.state.update
+          update: !this.state.update,
+          show: true
         });
       });
   }
@@ -143,7 +129,6 @@ class PiePage extends React.Component {
               color="cyan"
               style={{width: 150, marginLeft: "5%"}}
               onClick={this.show}
-              onChange={(e) => this.getValueKeyword(e)}
             >
               {" "}
               show result{" "}
