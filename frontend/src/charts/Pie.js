@@ -15,6 +15,12 @@ class PieChart extends React.Component{
     };
   }
 
+  static getDerivedStateFromProps(props, state) {
+    return {
+      chartData: props.chartData
+    };
+  }
+
   render(){
     const datas = this.state.chartData;
     if (!this.state.chartData) return (

@@ -22,7 +22,7 @@ function App() {
         <Route exact path='/vertical-bar' component={VerticalBar} />
         <Route exact path='/grouped-bar' component={GroupedBar} />
         <Route exact path='/line' component={Line} />
-        <Route exact path='/doughnut' component={EmotionBar} />
+        <Route exact path='/emotion-bar' component={EmotionBar} />
         <Route exact path='/pie' component={PiePage} />
         <Route exact path='/radar' component={Radar} />
         <Route exact path='/multi' component={MultiType} />

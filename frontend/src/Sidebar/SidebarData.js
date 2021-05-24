@@ -28,8 +28,8 @@ export const SidebarData = [
         cName: 'sub-nav'
       },
       {
-        title: 'Doughnut',
-        path: '/doughnut',
+        title: 'Emotion Bar',
+        path: '/emotion-bar',
         icon: <BsIcons.BsFillBarChartFill />,
         cName: 'sub-nav'
       },

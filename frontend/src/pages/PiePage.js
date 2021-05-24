@@ -1,8 +1,8 @@
 import React from "react";
 import PieChart from "../charts/Pie";
-import { Button, SelectPicker } from "rsuite";
+import {Button, SelectPicker} from "rsuite";
 import "rsuite/dist/styles/rsuite-default.css";
-import { areas, keywords } from "../lib/Selections";
+import {areas, keywords} from "../lib/Selections";
 
 let params = {};
 let chartData = {
@@ -135,13 +135,13 @@ class PiePage extends React.Component {
             {/*/>*/}
             <SelectPicker
               data={keywords}
-              style={{ width: 224}}
+              style={{width: 224}}
               onSelect={(v, i, e) => this.getValueKeyword(i)}
             />
             <Button
               appearance="primary"
               color="cyan"
-              style={{ width: 150, marginLeft: "5%" }}
+              style={{width: 150, marginLeft: "5%"}}
               onClick={this.show}
               onChange={(e) => this.getValueKeyword(e)}
             >
