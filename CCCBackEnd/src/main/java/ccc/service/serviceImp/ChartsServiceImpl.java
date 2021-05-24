@@ -203,7 +203,6 @@ public class ChartsServiceImpl implements ChartsService {
             map.put("percentage",Double.valueOf((int)map.get("count")/(double)totalTweets));
             map.put("date",date);
             resMap.put(location,map);
-
         }
         return resMap;
     }
@@ -219,7 +218,10 @@ public class ChartsServiceImpl implements ChartsService {
         for(String location:locations){
             resMap.put(location,new HashMap<String,Integer>());
         }
-        int totalTweets = 0;
+        Map<String,Integer> totalTweetsMap = new HashMap<>();
+        for(String location:locations){
+            totalTweetsMap.put(location,0);
+        }
         while(it.hasNext()){
             Map<String,Map<String,Object>> resultMap = new HashMap<>();
 
@@ -234,7 +236,7 @@ public class ChartsServiceImpl implements ChartsService {
                 Map<String,Integer> curMap = resMap.get(location);
                 String sentiment = (String)list.get(1);
                 if(keyword.equals(list.get(2))){
-                    totalTweets += 1;
+                    totalTweetsMap.put(location,totalTweetsMap.getOrDefault(location,0)+1);
                     curMap.put(sentiment,(curMap.getOrDefault(sentiment,0)+1));
                     resMap.put(location,curMap);
                 }
@@ -255,7 +257,7 @@ public class ChartsServiceImpl implements ChartsService {
                 sentiList.add(negNum);
                 curRes.put("total",total);
                 curRes.put("emotion",sentiList);
-                curRes.put("percentage",(double)total/totalTweets);
+                curRes.put("percentage",(double)total/totalTweetsMap.get(specificLocation));
                 curRes.put("name",specificLocation);
                 resultMap.put(specificLocation,curRes);
                 dateMap.put(curDate,resultMap);
@@ -278,7 +280,7 @@ public class ChartsServiceImpl implements ChartsService {
                     sentiList.add(negNum);
                     curRes.put("total", total);
                     curRes.put("emotion", sentiList);
-                    curRes.put("percentage", (double) total / totalTweets);
+                    curRes.put("percentage", (double) total / totalTweetsMap.get(location));
                     curRes.put("name", location);
                     resultMap.put(location, curRes);
 
