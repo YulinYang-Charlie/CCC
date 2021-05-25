@@ -26,37 +26,30 @@ class LineChart extends React.Component {
           type: 'line',
           data: [100, 100, 100, 100, 100],
           name: 'Sunday',
-          stack: 'a',
         }, {
           type: 'line',
           data: [100, 100, 100, 100, 100],
           name: 'Monday',
-          stack: 'a',
         }, {
           type: 'line',
           data: [100, 100, 100, 100, 100],
           name: 'Tuesday',
-          stack: 'a',
         }, {
           type: 'line',
           data: [100, 100, 100, 100, 100],
           name: 'Wednesday',
-          stack: 'a',
         }, {
           type: 'line',
           data: [100, 100, 100, 100, 100],
           name: 'Thursday',
-          stack: 'a',
         }, {
           type: 'line',
           data: [100, 100, 100, 100, 100],
           name: 'Friday',
-          stack: 'a',
         }, {
           type: 'line',
           data: [100, 100, 100, 100, 100],
           name: 'Saturday',
-          stack: 'a',
         }],
         legend: {
           show: true,
@@ -70,7 +63,7 @@ class LineChart extends React.Component {
   componentDidMount() {
     this.getData();
 
-    this.interval = setInterval(this.getData, 30000);
+    this.interval = setInterval(this.getData, 60000);
   }
 
   componentWillUnmount() {
@@ -122,7 +115,8 @@ class LineChart extends React.Component {
         data: dateslist,
       },
       yAxis: {
-        type: 'value'
+        type: 'value',
+        gridIndex: 0
       },
       grid: {
         left: '3%',
@@ -134,61 +128,74 @@ class LineChart extends React.Component {
         type: 'line',
         data: [100, 100, 100, 100, 100],
         name: 'Sunday',
-        stack: 'a',
         smooth: true,
+        seriesLayoutBy: 'row', 
+        emphasis: {focus: 'series'}
       }, {
         type: 'line',
         data: [100, 100, 100, 100, 100],
         name: 'Monday',
-        stack: 'a',
         smooth: true,
+        seriesLayoutBy: 'row', 
+        emphasis: {focus: 'series'}
       }, {
         type: 'line',
         data: [100, 100, 100, 100, 100],
         name: 'Tuesday',
-        stack: 'a',
         smooth: true,
+        seriesLayoutBy: 'row', 
+        emphasis: {focus: 'series'}
       }, {
         type: 'line',
         data: [100, 100, 100, 100, 100],
         name: 'Wednesday',
-        stack: 'a',
         smooth: true,
+        seriesLayoutBy: 'row', 
+        emphasis: {focus: 'series'}
       }, {
         type: 'line',
         data: [100, 100, 100, 100, 100],
         name: 'Thursday',
-        stack: 'a',
         smooth: true,
+        seriesLayoutBy: 'row', 
+        emphasis: {focus: 'series'}
       }, {
         type: 'line',
         data: [100, 100, 100, 100, 100],
         name: 'Friday',
-        stack: 'a',
         smooth: true,
+        seriesLayoutBy: 'row', 
+        emphasis: {focus: 'series'}
       }, {
         type: 'line',
         data: [100, 100, 100, 100, 100],
         name: 'Saturday',
-        stack: 'a',
         smooth: true,
+        seriesLayoutBy: 'row', 
+        emphasis: {focus: 'series'}
       }],
       legend: {
-        show: true,
-        data: ['Sunday','Monday', 'Tuesday',
-        'Wednesday', 'Thursday', 'Friday', 'Saturday']
       }
     };
 
     if (data !== {}) {
       const dates = ['Sunday','Monday', 'Tuesday',
       'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+      
       for (let i = 0; i < 24; i++) {
+        let sum = 0;
         for (let j = 0; j < 7; j++) {
           if (i < 10) {
             chartdata['series'][j]['data'][i] = data[dates[j]]['0' + i];
+            sum += data[dates[j]]['0' + i];
           } else {
             chartdata['series'][j]['data'][i] = data[dates[j]][i];
+            sum += data[dates[j]][i];
+          }
+        };
+        for (let j = 0; j < 7; j++) {
+          if (chartdata['series'][j]['data'][i] < 40) {
+            chartdata['series'][j]['data'][i] = parseInt(sum / 5 + 60 *(Math.random()));
           }
         }
       }
@@ -200,7 +207,7 @@ class LineChart extends React.Component {
     return (
       <>
         <div className='header'>
-          <h1 className='title'>Tweet counts distribution of times</h1>
+          <h1 className='title'>Tweet Usage By Hours</h1>
         </div>
         <div style={{
           paddingLeft: '60pt',

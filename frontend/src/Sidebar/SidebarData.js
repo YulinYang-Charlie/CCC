@@ -22,42 +22,42 @@ export const SidebarData = [
 
     subNav: [
       {
-        title: 'Pie',
+        title: 'Tweet counts',
         path: '/pie',
         icon: <BsIcons.BsFillBarChartFill />,
         cName: 'sub-nav'
       },
       {
-        title: 'Emotion Bar',
+        title: 'Emotion Sentiment',
         path: '/emotion-bar',
         icon: <BsIcons.BsFillBarChartFill />,
         cName: 'sub-nav'
       },
       {
-        title: 'Line',
+        title: 'Twitter usage by hours',
         path: '/line',
         icon: <BsIcons.BsFillBarChartFill />
       },
+      //   {
+      //   title: 'Grouped Bar',
+      //   path: '/grouped-bar',
+      //   icon: <BsIcons.BsFillBarChartFill />
+      // },
         {
-        title: 'Grouped Bar',
-        path: '/grouped-bar',
-        icon: <BsIcons.BsFillBarChartFill />
-      },
-        {
-        title: 'SingleAxis',
+        title: 'Focus trend',
         path: '/single-axis',
         icon: <BsIcons.BsFillBarChartFill />
       },
-        {
-        title: 'Radar',
-        path: '/radar',
-        icon: <BsIcons.BsFillBarChartFill />
-      },
-        {
-        title: 'Multi',
-        path: '/multi',
-        icon: <BsIcons.BsFillBarChartFill />
-      }
+      //   {
+      //   title: 'Radar',
+      //   path: '/radar',
+      //   icon: <BsIcons.BsFillBarChartFill />
+      // },
+      //   {
+      //   title: 'Multi',
+      //   path: '/multi',
+      //   icon: <BsIcons.BsFillBarChartFill />
+      // }
     ]
   },
   {
