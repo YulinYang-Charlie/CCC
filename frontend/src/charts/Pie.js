@@ -35,11 +35,17 @@ class PieChart extends React.Component{
           <h1 style={{
             fontSize: '100%',
               margin: 'auto'
-          }}>Tweet counts
+          }}>Tweet counts about {this.props.keyword}
           </h1>
         </h1>
       </div>
-      <Pie data={datas} />
+      <div style={{
+        height: '80%',
+        width: '80%',
+        paddingLeft: '18%',
+      }}>
+        <Pie data={datas} />
+      </div>
     </>
     )
   }
