@@ -8,10 +8,10 @@ let option = {
   title: {
     text: 'Tweet keywords',
     left: 'center',
-    top: 200,
+    top: 180,
     textStyle: {
       color: '#6f6e6e',
-      fontSize:40
+      fontSize:37
     }
   },
   tooltip: {
