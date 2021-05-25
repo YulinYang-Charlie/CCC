@@ -78,9 +78,9 @@ export const SidebarData = [
       }
     ]
   },
-  {
-    title: 'Team',
-    path: '/team',
-    icon: <IoIcons.IoMdPeople />
-  }
+  // {
+  //   title: 'Team',
+  //   path: '/team',
+  //   icon: <IoIcons.IoMdPeople />
+  // }
 ];

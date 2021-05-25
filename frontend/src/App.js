@@ -21,7 +21,6 @@ function App() {
     <Router>
       <Sidebar />
       <Switch>
-        <Redirect path="/" exact={true} to="/dashboard" />
         <Route exact path='/dashboard' component={Dashboard} />
         <Route exact path='/vertical-bar' component={VerticalBar} />
         <Route exact path='/grouped-bar' component={GroupedBarPage} />

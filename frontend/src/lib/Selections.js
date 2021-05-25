@@ -29,11 +29,11 @@ export const keywords = [
         "value": "vaccine",
         "role": "Master"
     },
-    {
-        "label": "Migration",
-        "value": "migration",
-        "role": "Master"
-    }
+    // {
+    //     "label": "Migration",
+    //     "value": "migration",
+    //     "role": "Master"
+    // }
     ]
 
 export const keywordsNoMig = [
