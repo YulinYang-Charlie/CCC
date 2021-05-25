@@ -1,0 +1,5 @@
+- hosts: frontend
+  vars_files:
+    - host_vars/mrc.yaml
+  roles:
+    - role: deploy-harvest

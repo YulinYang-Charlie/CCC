@@ -10,10 +10,10 @@
   args:
     chdir: CCC/frontend
 
-# - name: remove old image:frontend
-#   shell: docker rm frontend
-#   args:
-#     chdir: CCC/frontend
+- name: remove old image:frontend
+  shell: docker rmi frontend
+  args:
+    chdir: CCC/frontend
 
 
 - name: Start server
