@@ -12,7 +12,8 @@ import GoogleApiWrapper from "./charts/Map";
 import Dashboard from "./pages/Dashboard";
 import PiePage from "./pages/PiePage";
 import EmotionBar from "./charts/EmotionBar";
-import SingleAxis from "./charts/SingleAxis"
+import SingleAxis from "./charts/SingleAxis";
+import KeywordPie from "./charts/KeywordPie";
 import GroupedBarPage from './pages/GroupedBarPage';
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
         <Route exact path='/grouped-bar' component={GroupedBar} />
         <Route exact path='/single-axis' component={SingleAxis} />
         <Route exact path='/emotion-bar' component={EmotionBar} />
+        <Route exact path='/keyword-pie' component={KeywordPie} />
         <Route exact path='/pie' component={PiePage} />
         <Route exact path='/radar' component={Radar} />
         <Route exact path='/multi' component={MultiType} />
