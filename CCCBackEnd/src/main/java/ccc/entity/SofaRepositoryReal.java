@@ -146,10 +146,17 @@ public class SofaRepositoryReal extends CouchDbRepositorySupport<Sofa> {
             String time = key.substring(8,10);
             String weekday = dateToWeek(date);
             Map<String,Integer> curMap = resMap.get(weekday);
-            curMap.put(time,curMap.getOrDefault((time),0)+1);
+            int curTime = (Integer.valueOf(time)+10)%24;
+            String keyTime = ""+curTime;
+            if(curTime<10){
+                keyTime = "0"+keyTime;
+            }
+            curMap.put(keyTime,curMap.getOrDefault((keyTime),0)+1);
             resMap.put(weekday,curMap);
 
         }
+
+
 
         return resMap;
 
