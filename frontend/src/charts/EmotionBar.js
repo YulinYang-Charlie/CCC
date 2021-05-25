@@ -1,14 +1,13 @@
 import React from 'react';
 import ReactECharts from 'echarts-for-react';
 import {keywords} from "../lib/Selections";
-import {SelectPicker} from "rsuite";
+import {Button, SelectPicker} from "rsuite";
 
 export class EmotionBar extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      data: {},
-      loading: true,
+      loading: false,
       params: {
         keyword: "",
         area: "",
@@ -54,6 +53,7 @@ export class EmotionBar extends React.Component {
         }
       }
     }
+    this.show = this.show.bind(this);
   }
 
   getValueKeyword = (item) => {
@@ -63,12 +63,11 @@ export class EmotionBar extends React.Component {
         keyword: item.value
       },
     });
-    this.show();
   };
 
   show() {
     this.setState({
-      show: true,
+      loading:true
     });
     fetch("http://172.26.133.151:8080/charts/getTweetsByKeyword", {
       method: "POST",
@@ -85,7 +84,7 @@ export class EmotionBar extends React.Component {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        this.setState({data: data, chartData: this.setChartData(data)});
+        this.setState({loading:true, chartData: this.setChartData(data)});
         console.log(this.state.chartData);
       });
   }
@@ -188,6 +187,14 @@ export class EmotionBar extends React.Component {
             style={{width: 224, marginLeft: '3%', marginTop: '1.5%'}}
             onSelect={(v, i, e) => this.getValueKeyword(i)}
           />
+          <Button
+            appearance="primary"
+            color="cyan"
+            style={{width: 100, marginLeft: '1%', marginTop: '1.5%',marginBottom:'1.5%'}}
+            onClick={this.show}
+          >
+            show result
+          </Button>
         </div>
         <div>
           <ReactECharts option={this.state.chartData} style={{
