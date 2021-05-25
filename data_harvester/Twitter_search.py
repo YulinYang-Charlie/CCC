@@ -10,19 +10,13 @@ location = {"Victoria" : "-37.8390435045,145.106023031,300km", "New south wales"
          "South australia": "-30.5776848,135.2307377,700km", "Western australia": "-25.042261, 117.793221,1300km",
          "Northern territory":"-19.491411, 132.550964,1000km"}
 
-
 def get_args():
     """ Obtaining args from terminal """
     parser = argparse.ArgumentParser(description="Processing tweets")
     parser.add_argument("-db", "--db", type = str, required = True, 
                         help = "The Name of Database to store")
-    # parser.add_argument("-q", "--query", type = str, required = False, 
-    #                     help = "The keywords for twitter searching")
     parser.add_argument("-n", "--num_tweets", type=int, required = True,
                         help = "The number of tweets to be pulled")
-    # parser.add_argument("-l", "--loc", type=str, required = True,
-    #                     help = "The location of tweets (Victoria, New south wales, Queensland, Tasmania, South australia, Western australia, Northern territory)")
-
     args = parser.parse_args()
     
     return args
@@ -67,6 +61,7 @@ def dataprocess(data, q, loc):
     ans["coordinates"] = data["coordinates"]
     ans["place"] = data["place"]
 
+    # Sentiment Analysis
     score = SentimentIntensityAnalyzer().polarity_scores(data["text"])
     neg = score['neg']
     neu = score['neu']
@@ -97,15 +92,12 @@ def tweet_search(db, apis, q, count, loc):
         if count < 200:
             n = count
         count -= 200
+
+        # Collect data from Twitter and save into database
         try:
-
             cursor = tweepy.Cursor(api.search, q=q, lang="en", geocode=location[loc], max_id=maxid).items(n)
-            
             for i in cursor:
-
                 maxid = (i._json['id'])
-            
-                
                 db.save(dataprocess(i._json, q, loc))
         except:
             a += 1
@@ -118,14 +110,15 @@ def tweet_search(db, apis, q, count, loc):
 
 def main():
     args = get_args()
-
     apis = []
+
+    # Initial API
     for i in json.load(open("api.json"))['APIs']:
         auth = tweepy.OAuthHandler(i['consumer_key'], i['consumer_secret'])
         auth.set_access_token(i['access_token'], i['access_token_secret'])
-        
         apis.append(tweepy.API(auth))
-
+    
+    # Connect to CouchDB and Create or Select the corresponding database
     try:
         # couch = couchdb.Server('http://sumengzhang:199784zsM@119.45.38.52:5984') # Local test db
         couch = couchdb.Server('http://admin:admin@172.26.128.238:5984')
@@ -133,11 +126,6 @@ def main():
     except couchdb.http.PreconditionFailed:
         db = couch[args.db]
 
-    # if args.loc not in location.keys():
-    #     print("-l error")
-    #     print("The locations of tweets are (Victoria, New south wales, Queensland, Tasmania, South australia, Western australia, Northern territory)")
-    #     return
-    
     for i in location.keys():
         for keyword in ['covid','lockdown','mask','migration','international','vaccine','quarantine']:
             tweet_search(db, apis, keyword, args.num_tweets, i)

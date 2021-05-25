@@ -30,7 +30,7 @@ class Twitter_Stream(StreamListener):
 def get_args():
     """ Obtaining args from terminal """
     parser = argparse.ArgumentParser(description="Processing tweets")
-    # filenames
+
     parser.add_argument("-db", "--db", type = str, required = True, 
                         help = "The Name of Database to store")
 
@@ -96,11 +96,11 @@ def dataprocess(data):
 #         # requesting timeline
 #         id = id_lst.pop(0)
 
+#         # Collect data from Twitter and save into database
 #         try:
 #             for tweet in tweepy.Cursor(api.user_timeline, user_id=id).items(100):
 #                 print(tweet)
 #                 if "text" in tweet._json:
-#                     print('USER: %s -- %s\n' % (tweet._json['user']['screen_name'], tweet._json['text']))
 #                     # save tweet to database
 #                     db.save(tweet._json)
 #                 elif 'message' in tweet._json:
@@ -119,6 +119,8 @@ def main():
     apis = []
     n = 0
     streamauth = 0
+    
+    # Initial API
     for i in json.load(open("api.json"))['APIs']:
         auth = tweepy.OAuthHandler(i['consumer_key'], i['consumer_secret'])
         auth.set_access_token(i['access_token'], i['access_token_secret'])
@@ -127,6 +129,7 @@ def main():
         apis.append(tweepy.API(auth))
         n += 1
 
+    # Connect to CouchDB and Create or Select the corresponding database
     try:
         # couch = couchdb.Server('http://sumengzhang:199784zsM@119.45.38.52:5984') # Local test db
         couch = couchdb.Server('http://admin:admin@172.26.128.238:5984')
