@@ -186,7 +186,7 @@ export class KeywordPie extends React.Component {
           if (data[area]) dataSet[k] = data[area]['count']
         }).then(() => {
         fetchCount++
-        if (fetchCount > 6) {
+        if (fetchCount > 5) {
           option['series'][0]['data'][0]['value'] = dataSet['mask']
           option['series'][0]['data'][1]['value'] = dataSet['covid']
           option['series'][0]['data'][2]['value'] = dataSet['lockdown']
