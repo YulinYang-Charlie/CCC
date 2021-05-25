@@ -84,8 +84,10 @@ class PiePage extends React.Component {
           ],
         };
         for (const region in data) {
-          chartData.labels.push(region);
-          chartData.datasets[0].data.push(data[region].count);
+          if (region !== 'Northern territory' && region !== 'Western australia') {
+            chartData.labels.push(region);
+            chartData.datasets[0].data.push(data[region].count);
+          }
         }
         this.setState({
           chartData: chartData,
@@ -144,7 +146,8 @@ class PiePage extends React.Component {
               }}
             >
               <div>
-                <PieChart chartData={this.state.chartData} show={this.state.update}/>
+                <PieChart keyword = {params.keyword} 
+                chartData={this.state.chartData} show={this.state.update}/>
               </div>
             </div>
           ) : null}
