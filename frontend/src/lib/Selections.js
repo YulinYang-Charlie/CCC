@@ -71,18 +71,13 @@ export const keywordsNoMig = [
 
 export const areas = [
     {
-        "label": "All",
-        "value": "All",
-        "role": "Master"
-    },
-    {
         "label": "Victoria",
         "value": "Victoria",
         "role": "Master"
     },
     {
         "label": "New South Wales",
-        "value": "New South Wales",
+        "value": "New south wales",
         "role": "Master"
     },
     {
@@ -97,7 +92,7 @@ export const areas = [
     },
     {
         "label": "South Australia",
-        "value": "South Australia",
+        "value": "South australia",
         "role": "Master"
     },
 ]

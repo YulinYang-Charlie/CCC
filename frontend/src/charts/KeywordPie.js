@@ -1,84 +1,39 @@
 import React from 'react';
 import ReactECharts from 'echarts-for-react';
-import {areas, keywords, keywordsNoMig} from "../lib/Selections";
-import {Button, DateRangePicker, Loader, SelectPicker} from "rsuite";
-import EmotionBar from "./EmotionBar";
+import {areas, keywords} from "../lib/Selections";
+import {Button, Loader, SelectPicker} from "rsuite";
 
-let option = {
-  title: {
-    text: 'Tweet keywords',
-    left: 'center',
-    top: 180,
-    textStyle: {
-      color: '#6f6e6e',
-      fontSize:37
-    }
-  },
-  tooltip: {
-    trigger: 'item'
-  },
-  visualMap: {
+let area
+let dataSet = [
+  {value: 0, name: 'mask'},
+  {value: 0, name: 'covid'},
+  {value: 0, name: 'lockdown'},
+  {value: 0, name: 'quarantine'},
+  {value: 0, name: 'international'},
+  {value: 0, name: 'vaccine'},
+  {value: 0, name: 'migration'},
+]
 
-    show: false,
-    min: 80,
-    max: 600,
-    inRange: {
-      colorLightness: [0, 1]
-    }
-  },
-  series: [
-    {
+let fetchCount = 0
 
-      name: 'Keyword',
-      type: 'pie',
-      radius: '55%',
-      center: ['50%', '50%'],
-      data: [
-        {value: 335, name: 'Mask'},
-        {value: 310, name: 'Covid'},
-        {value: 235, name: 'Lockdown'},
-        {value: 400, name: 'Quarantine'},
-        {value: 235, name: 'International'},
-        {value: 400, name: 'Vaccine'},
-        {value: 274, name: 'Migration'},
-      ].sort(function (a, b) { return a.value - b.value; }),
-      roseType: 'radius',
-      label: {
-        color: 'rgb(0,0,0)'
-      },
-      labelLine: {
-        lineStyle: {
-          color: 'rgb(0,0,0)'
-        },
-        smooth: 0.2,
-        length: 10,
-        length2: 20
-      },
-      itemStyle: {
-        color: '#efba34',
-        shadowBlur: 200,
-        shadowColor: 'rgba(36,36,36,0.5)'
-      },
-
-      animationType: 'scale',
-      animationEasing: 'elasticOut',
-      animationDelay: function (idx) {
-        return Math.random() * 200;
-      }
-    }
-  ]
-};
-
-export class KeywordPie extends React.Component{
+export class KeywordPie extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       loading: false,
-      options:  {
+      options: {
+        title: {
+          text: 'Tweet keywords',
+          left: 'center',
+          top: 200,
+          textStyle: {
+            color: '#6f6e6e',
+            fontSize: 37
+          }
+        },
         tooltip: {
           trigger: 'item'
         },
-
         visualMap: {
           show: false,
           min: 80,
@@ -94,28 +49,30 @@ export class KeywordPie extends React.Component{
             radius: '55%',
             center: ['50%', '50%'],
             data: [
-              {value: 0, name: 'Mask'},
-              {value: 0, name: 'Covid'},
-              {value: 0, name: 'Lockdown'},
-              {value: 0, name: 'Quarantine'},
-              {value: 0, name: 'International'},
-              {value: 0, name: 'Vaccine'},
-              {value: 0, name: 'Migration'},
-            ].sort(function (a, b) { return a.value - b.value; }),
+              {value: 0, name: 'mask'},
+              {value: 0, name: 'covid'},
+              {value: 0, name: 'lockdown'},
+              {value: 0, name: 'quarantine'},
+              {value: 0, name: 'international'},
+              {value: 0, name: 'vaccine'},
+              {value: 0, name: 'migration'},
+            ].sort(function (a, b) {
+              return a.value - b.value;
+            }),
             roseType: 'radius',
             label: {
-              color: 'rgb(0,0,0)'
+              color: 'rgba(0,0,0,0.54)'
             },
             labelLine: {
               lineStyle: {
-                color: 'rgb(0,0,0)'
+                color: 'rgba(0,0,0,0.54)'
               },
               smooth: 0.2,
               length: 10,
               length2: 20
             },
             itemStyle: {
-              color: '#f7ce3e',
+              color: '#5497c7',
               shadowBlur: 200,
               shadowColor: 'rgba(36,36,36,0.5)'
             },
@@ -129,7 +86,134 @@ export class KeywordPie extends React.Component{
         ]
       }
     }
+    this.fetchData = this.fetchData.bind(this);
   }
+
+  setArea(item) {
+    console.log("area: " + item.value);
+    area = item.value
+  }
+
+  fetchData() {
+    if (!area) {
+      console.log('missing area')
+      return
+    }
+    fetchCount = 0
+    let option = {
+      title: {
+        text: 'Tweet keywords',
+        left: 'center',
+        top: 200,
+        textStyle: {
+          color: '#6f6e6e',
+          fontSize: 37
+        }
+      },
+      tooltip: {
+        trigger: 'item'
+      },
+      visualMap: {
+        show: false,
+        min: 100,
+        max: 3000,
+        inRange: {
+          colorLightness: [0, 1]
+        }
+      },
+      series: [
+        {
+          name: 'Keyword',
+          type: 'pie',
+          radius: '55%',
+          center: ['50%', '50%'],
+          data: [
+            {value: 0, name: 'mask'},
+            {value: 0, name: 'covid'},
+            {value: 0, name: 'lockdown'},
+            {value: 0, name: 'quarantine'},
+            {value: 0, name: 'international'},
+            {value: 0, name: 'vaccine'},
+          ].sort(function (a, b) {
+            return a.value - b.value;
+          }),
+          roseType: 'radius',
+          label: {
+            color: 'rgba(0,0,0,0.54)'
+          },
+          labelLine: {
+            lineStyle: {
+              color: 'rgba(0,0,0,0.54)'
+            },
+            smooth: 0.2,
+            length: 10,
+            length2: 20
+          },
+          itemStyle: {
+            color: '#5fafd7',
+            shadowBlur: 200,
+            shadowColor: 'rgba(36,36,36,0.5)'
+          },
+
+          animationType: 'scale',
+          animationEasing: 'elasticOut',
+          animationDelay: function (idx) {
+            return Math.random() * 200;
+          }
+        }
+      ]
+    }
+    this.setState({loading: true})
+    keywords.forEach((value => {
+      let k = value[['value']]
+      console.log("k: " + k)
+      fetch("http://172.26.133.151:8080/charts/getTweetsByKeyword", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          keyword: k,
+          location: area,
+        }),
+        mode: "cors",
+        cache: "default",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          if (data[area]) dataSet[k] = data[area]['count']
+        }).then(() => {
+        fetchCount++
+        if (fetchCount > 6) {
+          option['series'][0]['data'][0]['value'] = dataSet['mask']
+          option['series'][0]['data'][1]['value'] = dataSet['covid']
+          option['series'][0]['data'][2]['value'] = dataSet['lockdown']
+          option['series'][0]['data'][3]['value'] = dataSet['quarantine']
+          option['series'][0]['data'][4]['value'] = dataSet['international']
+          option['series'][0]['data'][5]['value'] = dataSet['vaccine']
+          option['series'][0]['data'].sort(function (a, b) {
+            return a.value - b.value;
+          })
+
+          // let dMax = Math.max[dataSet['mask'], dataSet['covid'], dataSet['lockdown'], dataSet['quarantine'], dataSet['international'], dataSet['vaccine']]
+
+          let dMax = option['series'][0]['data'][5].value
+          console.log('dMax: '+dMax)
+          option['visualMap']['max'] = dMax*1.2
+
+          console.log(option)
+          this.setState({
+            options: option,
+            loading: false
+          });
+        }
+      })
+    }))
+
+  }
+
   render() {
     return (
       <>
@@ -142,13 +226,13 @@ export class KeywordPie extends React.Component{
           <SelectPicker
             data={areas}
             style={{width: 224, marginLeft: '2%'}}
-            // onSelect={(v, i, e) => this.setValueKeyword(i)}
+            onSelect={(v, i, e) => this.setArea(i)}
           />
           <Button
             appearance="primary"
             color="cyan"
-            style={{width: 150, marginLeft: "5%"}}
-            // onClick={this.fetchData}
+            style={{width: 150, marginLeft: "5%", zIndex: 10,}}
+            onClick={this.fetchData}
           >
             show result
           </Button>
@@ -157,12 +241,11 @@ export class KeywordPie extends React.Component{
           {this.state.loading ? (
             <Loader content="Loading..." center='true' size='lg'/>
           ) : null}
-          <ReactECharts option={option} style={{
+          <ReactECharts option={this.state.options} style={{
             marginTop: '-120pt',
-            // paddingLeft: "20%",
-            // paddingRight: "20%",
+            marginLeft: "20%",
+            marginRight: "20%",
             height: '900pt',
-            // width:'900pt'
           }}/>
         </div>
       </>
