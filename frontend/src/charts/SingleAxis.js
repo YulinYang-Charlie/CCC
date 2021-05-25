@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactECharts from 'echarts-for-react';
-import {keywords} from "../lib/Selections";
+import {keywordsNoMig} from "../lib/Selections";
 import {Button, Loader, SelectPicker, DateRangePicker} from "rsuite";
 
 
@@ -211,7 +211,7 @@ export class SingleAxis extends React.Component {
             <DateRangePicker disabledDate={allowedRange('2021-5-11', day1)} onOk={(dates) => this.setDate(dates)}/>
           </div>
           <SelectPicker
-            data={keywords}
+            data={keywordsNoMig}
             style={{width: 224, marginLeft: '2%'}}
             onSelect={(v, i, e) => this.setValueKeyword(i)}
           />

@@ -210,10 +210,11 @@ class LineChart extends React.Component {
           <h1 className='title'>Tweet Usage By Hours</h1>
         </div>
         <div style={{
-          paddingLeft: '60pt',
-          paddingRight: '60pt',
-          paddingTop: '10pt',
-          paddingBottom:'80pt'
+          marginLeft: '60pt',
+          marginRight: '60pt',
+          // marginTop: '10pt',
+          margin:'auto',
+          height: '200%',
         }}>
           {this.state.loading?(
             <Loader content="Loading..." center='true'/>

@@ -29,14 +29,47 @@ export const keywords = [
         "value": "vaccine",
         "role": "Master"
     },
+    // {
+    //     "label": "Migration",
+    //     "value": "migration",
+    //     "role": "Master"
+    // }
     ]
 
-export const areas = [
+export const keywordsNoMig = [
     {
-        "label": "All",
-        "value": "All",
+        "label": "Mask",
+        "value": "mask",
         "role": "Master"
     },
+    {
+        "label": "Covid",
+        "value": "covid",
+        "role": "Master"
+    },
+    {
+        "label": "Lockdown",
+        "value": "lockdown",
+        "role": "Master"
+    },
+    {
+        "label": "Quarantine",
+        "value": "quarantine",
+        "role": "Master"
+    },
+    {
+        "label": "International",
+        "value": "international",
+        "role": "Master"
+    },
+    {
+        "label": "Vaccine",
+        "value": "vaccine",
+        "role": "Master"
+    }
+]
+
+export const areas = [
     {
         "label": "Victoria",
         "value": "Victoria",
@@ -44,7 +77,7 @@ export const areas = [
     },
     {
         "label": "New South Wales",
-        "value": "New South Wales",
+        "value": "New south wales",
         "role": "Master"
     },
     {
@@ -59,7 +92,7 @@ export const areas = [
     },
     {
         "label": "South Australia",
-        "value": "South Australia",
+        "value": "South australia",
         "role": "Master"
     },
 ]

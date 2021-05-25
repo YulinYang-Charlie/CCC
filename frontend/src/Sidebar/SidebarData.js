@@ -28,6 +28,12 @@ export const SidebarData = [
         cName: 'sub-nav'
       },
       {
+        title: 'Tweet keywords',
+        path: '/keyword-pie',
+        icon: <BsIcons.BsFillBarChartFill />,
+        cName: 'sub-nav'
+      },
+      {
         title: 'Emotion Sentiment',
         path: '/emotion-bar',
         icon: <BsIcons.BsFillBarChartFill />,
@@ -72,9 +78,9 @@ export const SidebarData = [
       }
     ]
   },
-  {
-    title: 'Team',
-    path: '/team',
-    icon: <IoIcons.IoMdPeople />
-  }
+  // {
+  //   title: 'Team',
+  //   path: '/team',
+  //   icon: <IoIcons.IoMdPeople />
+  // }
 ];
