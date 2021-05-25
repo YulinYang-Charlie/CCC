@@ -6,6 +6,34 @@ const mapStyles = {
   height: '80%',
 };
 
+const population = {
+  'Victoria': {
+    arrivals: 77197,
+    departures: 74954,
+    population: 6680648
+  },
+  'New south wales': {
+    arrivals: 89873,
+    departures: 110760,
+    population: 8166369
+  },
+  'Queensland': {
+    arrivals: 101789,
+    departures: 76441,
+    population: 5184847
+  },
+  'Tasmania': {
+    arrivals: 12962,
+    departures: 11749,
+    population: 541071
+  },
+  'South australia': {
+    arrivals: 23726,
+    departures: 25886,
+    population: 1770591
+  },
+};
+
 const locations = {
   'Victoria': {
     center: {lat: -37.840935, lng: 144.9631}
@@ -41,7 +69,7 @@ export class MapContainer extends React.Component {
         count: ''
       },
       locations:{
-        Victoria: {
+        'Victoria': {
           center: {lat: -37.840935, lng: 144.9631},
         },
         'New south wales': {
@@ -112,6 +140,9 @@ export class MapContainer extends React.Component {
         count: this.state.locations.Tasmania.count,
         name: 'Tasmania',
         center: this.state.locations.Tasmania.center,
+        population: 540780,
+        arrivals: population['Tasmania'].arrivals,
+        departures: population['Tasmania'].departures
       }
     })
   }
@@ -123,6 +154,9 @@ export class MapContainer extends React.Component {
         count: this.state.locations.Victoria.count,
         name: 'Victoria',
         center: this.state.locations.Victoria.center,
+        population: 6680648,
+        arrivals: population['Victoria'].arrivals,
+        departures: population['Victoria'].departures
       }
     })
   }
@@ -134,6 +168,9 @@ export class MapContainer extends React.Component {
         count: this.state.locations['New south wales'].count,
         name: 'New South Wales',
         center: this.state.locations['New south wales'].center,
+        population: 8166369,
+        arrivals: population['New south wales'].arrivals,
+        departures: population['New south wales'].departures
       }
     })
   }
@@ -145,6 +182,9 @@ export class MapContainer extends React.Component {
         count: this.state.locations['South australia'].count,
         name: 'South Australia',
         center: this.state.locations['South australia'].center,
+        population: 1770591,
+        arrivals: population['South australia'].arrivals,
+        departures: population['South australia'].departures
       }
     })
   }
@@ -156,6 +196,9 @@ export class MapContainer extends React.Component {
         count: this.state.locations.Queensland.count,
         name: 'Queensland',
         center: this.state.locations.Queensland.center,
+        population: 5184847,
+        arrivals: population['Queensland'].arrivals,
+        departures: population['Queensland'].departures
       }
     })
   }
@@ -181,77 +224,70 @@ export class MapContainer extends React.Component {
           visible={this.state.showingInfoWindow}
           position={this.state.selectedPlace.center}>
             <div>
-              <h5>{this.state.selectedPlace.name}</h5>
+              <h3>{this.state.selectedPlace.name}</h3>
+              ----------------------------------------------------------      
               <h6>Tweet counts: {this.state.selectedPlace.count}</h6>
+              <h6>Population: {this.state.selectedPlace.population}</h6>
+              <h6>Migration:</h6>
+              <h7>Arrivals: {this.state.selectedPlace.arrivals}</h7>
+              <br />
+              <h7>Departures: {this.state.selectedPlace.departures}</h7>
             </div>
         </InfoWindow>
         <Circle 
-          strokeColor= "#330066"
+          strokeColor= "#FF8547"
           strokeOpacity= {0.8}
           strokeWeight= {1}
-          fillColor= "#330066"
-          fillOpacity= {this.state.locations.Victoria.percentage + 0.15}
+          fillColor= "#FF8547"
+          fillOpacity= {this.state.locations.Victoria.count 
+            / population['Victoria'].population * 50}
           onClick= {this.showVictoria}
           center= {this.state.locations.Victoria.center}
           radius= {Math.sqrt(this.state.locations.Victoria.count) * 500}
           />
         <Circle 
-          strokeColor= "#330066"
+          strokeColor= "#FF8547"
           strokeOpacity= {0.8}
           strokeWeight= {1}
-          fillColor= "#330066"
-          fillOpacity= {this.state.locations['New south wales'].percentage + 0.15}
+          fillColor= "#FF8547"
+          fillOpacity= {this.state.locations['New south wales'].count
+            / population['New south wales'].population * 50}
           onClick={this.showNewSouthWales}
           center= {this.state.locations['New south wales'].center}
           radius= {Math.sqrt(this.state.locations['New south wales'].count) * 500}
           />
         <Circle 
-          strokeColor= "#330066"
+          strokeColor= "#FF8547"
           strokeOpacity= {0.8}
           strokeWeight= {1}
-          fillColor= "#330066"
-          fillOpacity= {this.state.locations['Northern territory'].percentage + 0.15}
-          center= {this.state.locations['Northern territory'].center}
-          radius= {Math.sqrt(this.state.locations['Northern territory'].count) * 500}
-          />
-        <Circle 
-          strokeColor= "#330066"
-          strokeOpacity= {0.8}
-          strokeWeight= {1}
-          fillColor= "#330066"
-          fillOpacity= {this.state.locations.Queensland.percentage + 0.15}
+          fillColor= "#FF8547"
+          fillOpacity= {this.state.locations.Queensland.count
+            / population['Queensland'].population * 50}
           onClick={this.showQueensland}
           center= {this.state.locations.Queensland.center}
           radius= {Math.sqrt(this.state.locations.Queensland.count) * 500}
           />
         <Circle 
-          strokeColor= "#330066"
+          strokeColor= "#FF8547"
           strokeOpacity= {0.8}
           strokeWeight= {1}
-          fillColor= "#330066"
-          fillOpacity= {this.state.locations['South australia'].percentage + 0.15}
+          fillColor= "#FF8547"
+          fillOpacity= {this.state.locations['South australia'].count
+          / population['South australia'].population * 50}
           onClick={this.showSouthAustralia}
           center= {this.state.locations['South australia'].center}
           radius= {Math.sqrt(this.state.locations['South australia'].count) * 500}
           />
         <Circle 
-          strokeColor= "#330066"
+          strokeColor= "#FF8547"
           strokeOpacity= {0.8}
           strokeWeight= {1}
-          fillColor= "#330066"
-          fillOpacity= {this.state.locations.Tasmania.percentage + 0.15}
+          fillColor= "#FF8547"
+          fillOpacity= {this.state.locations.Tasmania.count
+            / population['Tasmania'].population * 50}
           onClick= {this.showTasmania}
           center= {this.state.locations.Tasmania.center}
           radius= {Math.sqrt(this.state.locations.Tasmania.count) * 500}
-          />
-        <Circle 
-          strokeColor= "#330066"
-          strokeOpacity= {0.8}
-          strokeWeight= {1}
-          fillColor= "#330066"
-          fillOpacity= {this.state.locations['Western australia'].percentage + 0.15}
-          center= {this.state.locations['Western australia'].center}
-          radius= {Math.sqrt(this.state.locations['Western australia'].count) * 500}
           />
       </Map>
       </div>

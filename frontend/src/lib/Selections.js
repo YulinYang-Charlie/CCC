@@ -10,11 +10,6 @@ export const keywords = [
         "role": "Master"
     },
     {
-        "label": "Migration",
-        "value": "migration",
-        "role": "Master"
-    },
-    {
         "label": "Lockdown",
         "value": "lockdown",
         "role": "Master"
@@ -44,7 +39,7 @@ export const areas = [
     },
     {
         "label": "Victoria",
-        "value": "victoria",
+        "value": "Victoria",
         "role": "Master"
     },
     {
@@ -60,16 +55,6 @@ export const areas = [
     {
         "label": "Tasmania",
         "value": "Tasmania",
-        "role": "Master"
-    },
-    {
-        "label": "Western Australia",
-        "value": "Western Australia",
-        "role": "Master"
-    },
-    {
-        "label": "Northern Territories",
-        "value": "Northern Territories",
         "role": "Master"
     },
     {

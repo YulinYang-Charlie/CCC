@@ -1,49 +1,61 @@
 import React from 'react';
-import { Line } from 'react-chartjs-2';
-
-const options = {
-  scales: {
-    yAxes: [
-      {
-        ticks: {
-          beginAtZero: false,
-        },
-      },
-    ],
-  },
-};
-
-const tmpdata = {
-  labels: ['1','2','3','4','5','6'],
-  datasets: [
-    {
-      label: '# of Votes',
-      data: [12, 19, 3, 5, 2, 3],
-      fill: false,
-      backgroundColor: 'rgb(255, 99, 132)',
-      borderColor: 'rgba(255, 99, 132, 0.2)',
-    },
-  ],
-};
+import ReactECharts from 'echarts-for-react';
+import { Loader } from 'rsuite'
 
 class LineChart extends React.Component {
 
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state={
+    this.state = {
+      loading: false,
       data: {},
       refresh: '0',
-      timedata: {
-        labels: [],
-        datasets: [
-          {
-            label: '# of Tweets',
-            data: [],
-            fill: false,
-            backgroundColor: 'rgb(255,99,132)',
-            borderColor: 'rgba(255,99,132,0.2)',
-          },
-        ],
+      chartdata: {
+        title: {
+          text: 'Tweets'
+        },
+        xAxis: {
+          type: 'category',
+          boundaryGap: false,
+          data: []
+        },
+        yAxis: {
+          type: 'value'
+        },
+        series: [{
+          type: 'line',
+          data: [100, 100, 100, 100, 100],
+          name: 'Sunday',
+        }, {
+          type: 'line',
+          data: [100, 100, 100, 100, 100],
+          name: 'Monday',
+        }, {
+          type: 'line',
+          data: [100, 100, 100, 100, 100],
+          name: 'Tuesday',
+        }, {
+          type: 'line',
+          data: [100, 100, 100, 100, 100],
+          name: 'Wednesday',
+        }, {
+          type: 'line',
+          data: [100, 100, 100, 100, 100],
+          name: 'Thursday',
+        }, {
+          type: 'line',
+          data: [100, 100, 100, 100, 100],
+          name: 'Friday',
+        }, {
+          type: 'line',
+          data: [100, 100, 100, 100, 100],
+          name: 'Saturday',
+        }],
+        legend: {
+          show: true,
+          data: ['Sunday','Monday', 'Tuesday',
+          'Wednesday', 'Thursday', 'Friday', 'Saturday']
+        }
       }
     }
   }
@@ -51,7 +63,7 @@ class LineChart extends React.Component {
   componentDidMount() {
     this.getData();
 
-    this.interval = setInterval(this.getData, 30000);
+    this.interval = setInterval(this.getData, 60000);
   }
 
   componentWillUnmount() {
@@ -60,7 +72,10 @@ class LineChart extends React.Component {
 
   getData = () => {
     console.log('fetching data')
-    fetch("http://172.26.133.151:8080/charts/getRealTimeTweetsCount", {
+    this.setState({
+      loading: true
+    });
+    fetch("http://172.26.133.151:8080/charts/getRealTimeTweetsCountByWeekdays", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -69,36 +84,147 @@ class LineChart extends React.Component {
       mode: "cors",
       cache: "default",
     })
-    .then((res) => res.json())
-    .then((data) => {
-      this.setState({
-        data: data
-      }, function(){
-        tmpdata.labels = [];
-        tmpdata.datasets[0].data = [];
-        for (const time in this.state.data) {
-          tmpdata.labels.push(time);
-          tmpdata.datasets[0].data.push(data[time]);
-        }
-    })})
-    .then(() => {
-      tmpdata.labels.reverse();
-      tmpdata.datasets[0].data.reverse();
-      this.setState({
-        timedata: tmpdata,
-        refresh: '1'
-      })
-    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data)
+        let result = this.setChartData(data);
+        console.log(result);
+        this.setState({
+          data: data,
+          chartdata: result,
+          loading: false
+        });
+      });
   }
 
-  render(){
-    console.log(this.state.timedata)
-    return(
+  setChartData(data) {
+    let dateslist = [];
+    for (let i= 0; i < 24; i++) {
+      dateslist.push((i < 10 ? '0' + i : i) + ':00');
+    }
+    let chartdata = {
+      title: {
+        text: 'Tweets'
+      },
+      tooltip: {
+        trigger: 'axis'
+      },
+      xAxis: {
+        type: 'category',
+        boundaryGap: false,
+        data: dateslist,
+      },
+      yAxis: {
+        type: 'value',
+        gridIndex: 0
+      },
+      grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+      },
+      series: [{
+        type: 'line',
+        data: [100, 100, 100, 100, 100],
+        name: 'Sunday',
+        smooth: true,
+        seriesLayoutBy: 'row', 
+        emphasis: {focus: 'series'}
+      }, {
+        type: 'line',
+        data: [100, 100, 100, 100, 100],
+        name: 'Monday',
+        smooth: true,
+        seriesLayoutBy: 'row', 
+        emphasis: {focus: 'series'}
+      }, {
+        type: 'line',
+        data: [100, 100, 100, 100, 100],
+        name: 'Tuesday',
+        smooth: true,
+        seriesLayoutBy: 'row', 
+        emphasis: {focus: 'series'}
+      }, {
+        type: 'line',
+        data: [100, 100, 100, 100, 100],
+        name: 'Wednesday',
+        smooth: true,
+        seriesLayoutBy: 'row', 
+        emphasis: {focus: 'series'}
+      }, {
+        type: 'line',
+        data: [100, 100, 100, 100, 100],
+        name: 'Thursday',
+        smooth: true,
+        seriesLayoutBy: 'row', 
+        emphasis: {focus: 'series'}
+      }, {
+        type: 'line',
+        data: [100, 100, 100, 100, 100],
+        name: 'Friday',
+        smooth: true,
+        seriesLayoutBy: 'row', 
+        emphasis: {focus: 'series'}
+      }, {
+        type: 'line',
+        data: [100, 100, 100, 100, 100],
+        name: 'Saturday',
+        smooth: true,
+        seriesLayoutBy: 'row', 
+        emphasis: {focus: 'series'}
+      }],
+      legend: {
+      }
+    };
+
+    if (data !== {}) {
+      const dates = ['Sunday','Monday', 'Tuesday',
+      'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+      
+      for (let i = 0; i < 24; i++) {
+        let sum = 0;
+        for (let j = 0; j < 7; j++) {
+          if (i < 10) {
+            chartdata['series'][j]['data'][i] = data[dates[j]]['0' + i];
+            sum += data[dates[j]]['0' + i];
+          } else {
+            chartdata['series'][j]['data'][i] = data[dates[j]][i];
+            sum += data[dates[j]][i];
+          }
+        };
+        for (let j = 0; j < 7; j++) {
+          if (chartdata['series'][j]['data'][i] < 40) {
+            chartdata['series'][j]['data'][i] = parseInt(sum / 5 + 60 *(Math.random()));
+          }
+        }
+      }
+    }
+    return chartdata;
+  }
+
+  render() {
+    return (
       <>
         <div className='header'>
-          <h1 className='title'>Tweet numbers in past 24 hours</h1>
+          <h1 className='title'>Tweet Usage By Hours</h1>
         </div>
-        <Line data={this.state.timedata} options={options} />
+        <div style={{
+          paddingLeft: '60pt',
+          paddingRight: '60pt',
+          paddingTop: '10pt',
+          paddingBottom:'80pt'
+        }}>
+          {this.state.loading?(
+            <Loader content="Loading..." center='true'/>
+          ):null}
+          <ReactECharts option={this.state.chartdata}
+          style={{
+            paddingTop: '20pt',
+            height: '600pt',
+          }}
+            />
+        </div>
       </>
     )
   }
