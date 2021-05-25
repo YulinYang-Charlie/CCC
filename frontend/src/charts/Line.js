@@ -219,10 +219,10 @@ class LineChart extends React.Component {
             <Loader content="Loading..." center='true'/>
           ):null}
           <ReactECharts option={this.state.chartdata}
-          style={{
-            paddingTop: '20pt',
-            height: '600pt',
-          }}
+          // style={{
+          //   paddingTop: '20pt',
+          //   height: '600pt',
+          // }}
             />
         </div>
       </>
